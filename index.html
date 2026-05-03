@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WP Software Technologies â Software Built for the Real World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #2d5bff;
+      --accent-light: #e8edff;
+      --dark: #0a0f1c;
+      --charcoal: #1a1f2e;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --white: #ffffff;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --transition: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* âââ NAVIGATION âââ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.25rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s var(--transition);
+    }
+    nav.scrolled {
+      padding: 0.8rem 3rem;
+      box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta {
+      background: var(--dark) !important;
+      color: var(--white) !important;
+      padding: 0.6rem 1.5rem !important;
+      border-radius: 100px;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em;
+      transition: transform 0.3s var(--transition), box-shadow 0.3s !important;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(10,15,28,0.2); }
+
+    /* âââ HAMBURGER (mobile) âââ */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+
+    /* âââ HERO âââ */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; right: -20%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(45,91,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -30%; left: -15%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(45,91,255,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s var(--transition) forwards;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.35s var(--transition) forwards;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--gray-500);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.5s var(--transition) forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.8s 0.65s var(--transition) forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      background: var(--accent);
+      color: var(--white);
+      border: none; border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,91,255,0.3); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      background: transparent;
+      color: var(--gray-700);
+      border: 1.5px solid var(--gray-300);
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem; font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s var(--transition);
+    }
+    .btn-secondary:hover { border-color: var(--dark); color: var(--dark); }
+    .scroll-indicator {
+      position: absolute; bottom: 2.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeUp 0.8s 1s var(--transition) forwards;
+    }
+    .scroll-indicator span {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray-300);
+    }
+    .scroll-line {
+      width: 1px; height: 40px; background: var(--gray-300); position: relative; overflow: hidden;
+    }
+    .scroll-line::after {
+      content: ''; position: absolute; top: -100%; left: 0;
+      width: 100%; height: 100%; background: var(--accent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* âââ SECTIONS âââ */
+    section { padding: 7rem 3rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* âââ PRODUCTS âââ */
+    #products { background: var(--gray-100); }
+    .products-header { text-align: center; margin-bottom: 4rem; }
+    .products-header .section-subtitle { margin: 0 auto; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    }
+    .product-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .product-card.featured::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #6d8cff);
+    }
+    .product-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+    .product-icon.safety { background: #e8f5e9; }
+    .product-icon.epcr { background: #fce4ec; }
+    .product-icon.cad { background: #e3f2fd; }
+    .product-icon.race { background: #fff3e0; }
+    .product-card h3 {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .product-card p {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .product-tag {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tag-live { background: #e8f5e9; color: #2e7d32; }
+    .tag-soon { background: var(--gray-100); color: var(--gray-500); }
+    .product-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--accent); text-decoration: none;
+      transition: gap 0.3s;
+    }
+    .product-link:hover { gap: 0.7rem; }
+
+    /* âââ ABOUT âââ */
+    #about { max-width: 1100px; margin: 0 auto; }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 0 3rem;
+    }
+    .about-visual {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--dark) 0%, #1e2a4a 100%);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual::before {
+      content: '';
+      position: absolute; width: 200%; height: 200%;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 20px,
+        rgba(255,255,255,0.015) 20px, rgba(255,255,255,0.015) 21px
+      );
+    }
+    .about-monogram {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--white);
+      opacity: 0.9;
+      letter-spacing: -0.04em;
+    }
+    .about-content .section-subtitle { margin-bottom: 2rem; }
+    .about-values { display: flex; flex-direction: column; gap: 1.25rem; }
+    .value-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .value-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+    .value-item h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 0.15rem;
+    }
+    .value-item p { font-size: 0.85rem; color: var(--gray-500); line-height: 1.55; }
+
+    /* âââ CUSTOM SOFTWARE âââ */
+    #custom {
+      background: var(--dark);
+      color: var(--white);
+      padding: 6rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #custom::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(45,91,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .custom-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .custom-header { text-align: center; margin-bottom: 4rem; }
+    .custom-header .section-label { color: var(--accent-light); }
+    .custom-header h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .custom-header h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .custom-header p {
+      font-size: 1.05rem;
+      color: var(--gray-300);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .custom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .custom-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      transition: all 0.3s var(--transition);
+    }
+    .custom-tile:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(45,91,255,0.4);
+      transform: translateY(-3px);
+    }
+    .custom-tile-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+    }
+    .custom-tile h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .custom-tile p {
+      font-size: 0.85rem;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+    .custom-cta {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .custom-cta p {
+      font-size: 0.95rem;
+      color: var(--gray-300);
+      margin-bottom: 1.5rem;
+    }
+    .custom-cta strong { color: var(--white); }
+    .btn-custom {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.75rem;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s var(--transition);
+    }
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(45,91,255,0.4);
+    }
+
+    /* âââ TEAM âââ */
+    .team-section {
+      padding: 5rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .team-section .section-title { margin-bottom: 3rem; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .team-card {
+      text-align: center;
+    }
+    .team-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .team-card h4 {
+      font-size: 1rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 0.2rem;
+    }
+    .team-card p { font-size: 0.82rem; color: var(--gray-500); }
+
+    /* âââ CONTACT âââ */
+    #contact {
+      background: var(--dark);
+      color: var(--white);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .contact-info .section-label { color: rgba(255,255,255,0.4); }
+    .contact-info .section-title { color: var(--white); margin-bottom: 1.5rem; }
+    .contact-info p { color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.7);
+    }
+    .contact-item-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .form-row { display: flex; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+    .contact-form .btn-primary { width: 100%; justify-content: center; padding: 1rem; }
+
+    /* âââ FOOTER âââ */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    .footer-links { display: flex; gap: 2rem; }
+
+    /* âââ ANIMATIONS âââ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* âââ RESPONSIVE âââ */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--white);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--gray-100);
+        gap: 1rem;
+      }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions a { width: 100%; justify-content: center; }
+      .about-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 0; }
+      .about-visual { aspect-ratio: 16/9; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .form-row { flex-direction: column; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">WP<span>.</span> SoftTech</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#custom">Custom</a>
+      <a href="#team">Team</a>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+      <a href="customer-portal.html" class="nav-cta" style="background:var(--accent) !important;">Customer Portal</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Coming Soon â Atala Safety</div>
+    <h1>Software built for the <em>real world</em></h1>
+    <p>From fire stations to finish lines, WP Software Technologies builds the tools professionals trust when it matters most.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products â</a>
+      <a href="#contact" class="btn-secondary">Request a Demo</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="products-header reveal">
+      <div class="section-label">Our Products</div>
+      <h2 class="section-title">Purpose-built software for<br>high-stakes industries</h2>
+      <p class="section-subtitle">We partner with subject matter experts in every industry we serve â ensuring our software is user-friendly, meets real-world needs, and goes beyond what's expected.</p>
+    </div>
+
+    <div class="products-grid">
+      <!-- Atala Safety (Live) -->
+      <div class="product-card featured reveal">
+        <div class="product-icon safety">ð¡ï¸</div>
+        <h3>Atala Safety</h3>
+        <p>A comprehensive safety management platform built for fire departments, EMS agencies, and industrial teams. Track incidents, manage inspections, and stay compliant â all in one place.</p>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="product-tag tag-live">Live</span>
+          <a href="atala-safety.html" class="product-link">Learn More â</a>
+        </div>
+      </div>
+
+      <!-- ePCR (Coming Soon) -->
+      <div class="product-card reveal">
+        <div class="product-icon epcr">ð¥</div>
+        <h3>ePCR for EMS</h3>
+        <p>Electronic patient care reporting designed for speed and accuracy in the field. Capture vitals, narratives, and protocols without slowing down your crew.</p>
+        <span class="product-tag tag-soon">Coming Soon</span>
+      </div>
+
+      <!-- CAD (Coming Soon) -->
+      <div class="product-card reveal">
+        <div class="product-icon cad">ð¡</div>
+        <h3>Computer Aided Dispatch</h3>
+        <p>Next-generation dispatch software that keeps units coordinated and response times low. Built for 911 centers and mutual aid networks.</p>
+        <span class="product-tag tag-soon">Coming Soon</span>
+      </div>
+
+      <!-- Race Dashes (Coming Soon) -->
+      <div class="product-card reveal">
+        <div class="product-icon race">ð</div>
+        <h3>Digital Race Dashes</h3>
+        <p>Real-time digital dashboards for race trucks and off-road vehicles. Monitor every gauge, lap, and sensor from a single rugged display.</p>
+        <span class="product-tag tag-soon">Coming Soon</span>
+      </div>
+
+      <!-- Manufacturing Production (Coming Soon) -->
+      <div class="product-card reveal">
+        <div class="product-icon" style="background:#ede7f6;">ð­</div>
+        <h3>Manufacturing Production</h3>
+        <p>Streamline your production floor with software built for tracking work orders, quality control, inventory, and real-time output â designed hand-in-hand with manufacturing professionals.</p>
+        <span class="product-tag tag-soon">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-layout">
+      <div class="about-visual reveal">
+        <div class="about-monogram">WP</div>
+      </div>
+      <div class="about-content reveal">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">We build what the<br>big guys won't</h2>
+        <p class="section-subtitle">WP Software Technologies was founded on a simple idea: the people doing the hardest jobs deserve software that actually works for them â not against them. We engage directly with subject matter experts in every field we serve, so every product is shaped by the people who know the work best.</p>
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div>
+              <h4>SME-Driven Development</h4>
+              <p>We sit down with the experts â firefighters, paramedics, dispatchers, racers, and plant managers â to build software that fits their workflow, not the other way around.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div>
+              <h4>Field-First Design</h4>
+              <p>Every feature is tested by the people who'll use it â in turnout gear, in an ambulance, or at 90 mph on dirt.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div>
+              <h4>Reliability Over Flash</h4>
+              <p>Our software works when the Wi-Fi doesn't. Offline-capable, rugged, and built for real conditions.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div>
+              <h4>No Contracts, No Games</h4>
+              <p>Transparent pricing, honest support, and tools you can actually afford. We're a small team that does right by our users.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM SOFTWARE -->
+  <section id="custom">
+    <div class="custom-inner">
+      <div class="custom-header reveal">
+        <div class="section-label">Custom Development</div>
+        <h2>Off-the-shelf software<br>or built <em>just for you</em></h2>
+        <p>Our core products solve real problems for industries we know inside and out â but every business is different. If our software doesn't quite fit your workflow, we'll build something that does. No company is too big or too small.</p>
+      </div>
+
+      <div class="custom-grid reveal">
+        <div class="custom-tile">
+          <div class="custom-tile-icon">â¡</div>
+          <h4>Start With Our Core</h4>
+          <p>Adopt our existing platforms â Atala Safety, ePCR, CAD, Race Dashes, and more â built from the ground up with subject matter experts.</p>
+        </div>
+        <div class="custom-tile">
+          <div class="custom-tile-icon">ð§</div>
+          <h4>Tailor It To You</h4>
+          <p>Need custom modules, integrations, or workflows added to one of our products? We'll extend it to fit how your team actually works.</p>
+        </div>
+        <div class="custom-tile">
+          <div class="custom-tile-icon">ð ï¸</div>
+          <h4>Build From Scratch</h4>
+          <p>Have a problem nobody's solved? We'll sit down with you, learn your process, and build software designed around your business â not a template.</p>
+        </div>
+        <div class="custom-tile">
+          <div class="custom-tile-icon">ð¤</div>
+          <h4>Any Size, Any Scope</h4>
+          <p>From a single-shop tool for a five-person crew to enterprise platforms for thousands of users â we scale the work to fit the company, not the other way around.</p>
+        </div>
+      </div>
+
+      <div class="custom-cta reveal">
+        <p>Have an idea? A workflow nothing on the market handles? <strong>Let's talk.</strong></p>
+        <a href="#contact" class="btn-custom">Start a Conversation â</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="team-section">
+    <h2 class="section-title reveal">Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">JW</div>
+        <h4>James Williams</h4>
+        <p>Founder & CEO</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">BP</div>
+        <h4>Bryan Pigg</h4>
+        <p>Co-Founder & CTO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Let's talk about<br>what you need</h2>
+        <p>Whether you want a demo of Atala Safety or want to learn about our upcoming products, we'd love to hear from you.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">â</div>
+            <span>contact@w-psofttech.com</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">â</div>
+            <span>(555) 000-0000</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">ð</div>
+            <span>Mississippi, USA</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <input type="text" placeholder="First Name">
+          <input type="text" placeholder="Last Name">
+        </div>
+        <input type="email" placeholder="Email Address">
+        <input type="text" placeholder="Company / Organization">
+        <textarea placeholder="Tell us what you're looking for..."></textarea>
+        <button class="btn-primary" type="button">Send Message â</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Â© 2026 WP Software Technologies. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
