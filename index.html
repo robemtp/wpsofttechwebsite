@@ -80,6 +80,28 @@
       transition: transform 0.3s var(--transition), box-shadow 0.3s !important;
     }
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(10,15,28,0.2); }
+    .nav-coming-soon {
+      background: linear-gradient(135deg, var(--accent), #6d8cff) !important;
+      color: var(--white) !important;
+      padding: 0.6rem 1.5rem !important;
+      border-radius: 100px;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em;
+      position: relative;
+      transition: transform 0.3s var(--transition), box-shadow 0.3s !important;
+    }
+    .nav-coming-soon:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(45,91,255,0.3); }
+    .nav-coming-soon .badge-soon {
+      font-size: 0.55rem;
+      background: rgba(255,255,255,0.25);
+      padding: 0.15rem 0.4rem;
+      border-radius: 100px;
+      margin-left: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      vertical-align: middle;
+    }
 
     /* ─── HAMBURGER (mobile) ─── */
     .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -610,6 +632,7 @@
       <a href="#about">About</a>
       <a href="#custom">Custom</a>
       <a href="#team">Team</a>
+      <a href="atala-safety.html" class="nav-coming-soon">Atala Safety <span class="badge-soon">Coming Soon</span></a>
       <a href="#contact" class="nav-cta">Get in Touch</a>
       <a href="customer-portal.html" class="nav-cta" style="background:var(--accent) !important;">Customer Portal</a>
     </div>
