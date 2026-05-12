@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WP Software Technologies — Software Built for the Real World</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230D47A1'/%3E%3Cstop offset='100%25' stop-color='%231565C0'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300BFA5'/%3E%3Cstop offset='100%25' stop-color='%2326A69A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='144' height='144' rx='28' fill='url(%23g1)'/%3E%3Cpath d='M36 42L52 118 68 70 80 70 96 118 112 42' fill='none' stroke='%23FFF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M80 118L80 50 105 50Q128 50 128 70 128 90 105 90L80 90' fill='none' stroke='url(%23g2)' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='128' cy='112' r='5' fill='%2300BFA5'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
@@ -51,14 +52,37 @@
       box-shadow: 0 1px 20px rgba(0,0,0,0.06);
     }
     .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--transition);
+    }
+    .nav-logo:hover .nav-logo-icon { transform: scale(1.05); }
+    .nav-logo-text {
       font-family: var(--font-body);
       font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--dark);
-      text-decoration: none;
+      line-height: 1.1;
     }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-logo-sub {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-top: 1px;
+    }
     .nav-links { display: flex; gap: 2.5rem; align-items: center; }
     .nav-links a {
       font-size: 0.875rem;
@@ -626,7 +650,19 @@
 
   <!-- NAVIGATION -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">WP<span>.</span> SoftTech</a>
+    <a href="#" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="navGrad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0D47A1"/><stop offset="100%" stop-color="#1565C0"/></linearGradient>
+          <linearGradient id="navGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00BFA5"/><stop offset="100%" stop-color="#26A69A"/></linearGradient>
+        </defs>
+        <rect x="8" y="8" width="144" height="144" rx="28" ry="28" fill="url(#navGrad1)"/>
+        <path d="M 36 42 L 52 118 L 68 70 L 80 70 L 96 118 L 112 42" fill="none" stroke="#FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 80 118 L 80 50 L 105 50 Q 128 50 128 70 Q 128 90 105 90 L 80 90" fill="none" stroke="url(#navGrad2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="128" cy="112" r="5" fill="#00BFA5" opacity="0.9"/>
+      </svg>
+      <div class="nav-logo-text">WP<span>.</span> SoftTech<span class="nav-logo-sub">Software Solutions</span></div>
+    </a>
     <div class="nav-links" id="navLinks">
       <a href="#products">Products</a>
       <a href="#about">About</a>
@@ -712,7 +748,21 @@
   <section id="about">
     <div class="about-layout">
       <div class="about-visual reveal">
-        <div class="about-monogram">WP</div>
+        <svg width="180" height="180" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="aboutBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0A3D91"/><stop offset="100%" stop-color="#1565C0"/></linearGradient>
+            <linearGradient id="aboutAccent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00E5CC"/><stop offset="100%" stop-color="#00BFA5"/></linearGradient>
+          </defs>
+          <rect width="512" height="512" rx="96" ry="96" fill="url(#aboutBg)"/>
+          <line x1="40" y1="420" x2="160" y2="420" stroke="rgba(0,191,165,0.2)" stroke-width="1.5"/>
+          <line x1="352" y1="92" x2="472" y2="92" stroke="rgba(0,191,165,0.2)" stroke-width="1.5"/>
+          <circle cx="472" cy="92" r="3" fill="rgba(0,191,165,0.3)"/>
+          <circle cx="40" cy="420" r="3" fill="rgba(0,191,165,0.3)"/>
+          <path d="M 88 140 L 136 372 L 200 220 L 224 220 L 288 372 L 336 140" fill="none" stroke="#FFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 224 372 L 224 165 L 330 165 Q 420 165 420 240 Q 420 315 330 315 L 224 315" fill="none" stroke="url(#aboutAccent)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="420" cy="365" r="16" fill="#00BFA5" opacity="0.85"/>
+          <circle cx="420" cy="365" r="6" fill="#FFF" opacity="0.5"/>
+        </svg>
       </div>
       <div class="about-content reveal">
         <div class="section-label">About Us</div>
@@ -830,7 +880,19 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2026 WP Software Technologies. All rights reserved.</span>
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <svg width="28" height="28" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="footGrad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#1E88E5"/></linearGradient>
+          <linearGradient id="footGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00E5CC"/><stop offset="100%" stop-color="#00BFA5"/></linearGradient>
+        </defs>
+        <rect x="8" y="8" width="144" height="144" rx="28" ry="28" fill="url(#footGrad1)"/>
+        <path d="M 36 42 L 52 118 L 68 70 L 80 70 L 96 118 L 112 42" fill="none" stroke="#FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 80 118 L 80 50 L 105 50 Q 128 50 128 70 Q 128 90 105 90 L 80 90" fill="none" stroke="url(#footGrad2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="128" cy="112" r="5" fill="#00E5CC" opacity="0.9"/>
+      </svg>
+      <span>© 2026 WP Software Technologies. All rights reserved.</span>
+    </div>
     <div class="footer-links">
       <a href="#products">Products</a>
       <a href="#about">About</a>
