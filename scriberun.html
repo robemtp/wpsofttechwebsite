@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScribeRun EMS — AI-Powered ePCR Platform</title>
+<meta name="description" content="ScribeRun EMS uses AI that reads your protocols, writes billing-optimized narratives, and reviews 100% of your charts automatically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0c10;--bg-card:#12151c;
+--accent:#e53e3e;--accent-glow:rgba(229,62,62,0.3);--accent-light:#fc8181;
+--blue:#3b82f6;--green:#10b981;--gold:#f59e0b;
+--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+--border:#1e293b;--border-light:#334155;--white:#fff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+::selection{background:rgba(229,62,62,.3);color:#fff}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:4px}
+a{text-decoration:none;color:inherit}
+h1,h2,h3,h4{font-family:'Outfit',sans-serif}
+
+/* --- NAV --- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all .3s ease}
+.nav.scrolled{padding:12px 0;background:rgba(10,12,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#c53030);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:900;font-size:18px;color:#fff;box-shadow:0 2px 12px var(--accent-glow)}
+.logo-text{font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#fff;letter-spacing:-.5px}
+.logo-text span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-muted);transition:color .2s}
+.nav-links a:hover{color:#fff}
+
+/* --- BUTTONS --- */
+.btn{font-family:'Outfit',sans-serif;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#c53030);color:#fff;box-shadow:0 4px 20px var(--accent-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+.btn-secondary{background:transparent;color:var(--text);border:1.5px solid var(--border-light)}
+.btn-secondary:hover{border-color:var(--text-muted)}
+.btn-sm{padding:10px 20px;font-size:13px}
+.btn-lg{padding:18px 40px;font-size:17px}
+
+/* --- BADGE --- */
+.badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.badge-accent{color:var(--accent);background:rgba(229,62,62,.09);border:1px solid rgba(229,62,62,.25)}
+.badge-green{color:var(--green);background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.25)}
+.badge-blue{color:var(--blue);background:rgba(59,130,246,.09);border:1px solid rgba(59,130,246,.25)}
+.badge-gold{color:var(--gold);background:rgba(245,158,11,.09);border:1px solid rgba(245,158,11,.25)}
+
+/* --- HERO --- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-glow1{position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);filter:blur(80px);opacity:.4}
+.hero-glow2{position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,.2),transparent 70%);filter:blur(60px);opacity:.3}
+.hero-grid{max-width:1200px;margin:0 auto;padding:140px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;width:100%}
+.hero-copy{opacity:0;transform:translateY(30px);animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .1s forwards}
+.hero-copy h1{font-size:clamp(36px,5vw,60px);font-weight:900;line-height:1.08;color:#fff;margin:24px 0;letter-spacing:-1.5px}
+.hero-copy h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-copy p{font-size:18px;line-height:1.7;color:var(--text-muted);max-width:480px;margin-bottom:36px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.hero-trust{margin-top:48px;display:flex;gap:32px;flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--text-dim);letter-spacing:.8px;text-transform:uppercase}
+.hero-demo{opacity:0;transform:translateY(40px) scale(.95);animation:fadeUp 1s cubic-bezier(.16,1,.3,1) .3s forwards}
+
+/* --- DEMO WALKTHROUGH --- */
+.demo-box{border-radius:16px;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px var(--accent-glow)}
+.demo-topbar{padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.3)}
+.demo-dots{display:flex;gap:6px}
+.demo-dots span{width:10px;height:10px;border-radius:50%}
+.demo-url{flex:1;text-align:center;font-size:11px;color:var(--text-dim)}
+.demo-layout{display:grid;grid-template-columns:140px 1fr;min-height:340px}
+.demo-sidebar{padding:12px 8px;border-right:1px solid var(--border);background:rgba(0,0,0,.15);display:flex;flex-direction:column;gap:2px}
+.demo-tab{padding:8px 10px;border-radius:7px;font-size:11px;cursor:pointer;border:1px solid transparent;transition:all .3s ease;font-weight:400;color:var(--text-dim)}
+.demo-tab.active{background:rgba(229,62,62,.09);color:var(--accent-light);border-color:rgba(229,62,62,.2);font-weight:600}
+.demo-tab:hover:not(.active){color:var(--text-muted)}
+.demo-progress{margin-top:auto;padding:8px 10px;display:flex;gap:6px;justify-content:center}
+.demo-progress span{width:6px;height:6px;border-radius:50%;background:var(--border-light);transition:background .3s}
+.demo-progress span.active{background:var(--accent)}
+.demo-content{padding:18px}
+.demo-content-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.demo-content-header h3{font-size:13px;font-weight:700;color:#fff}
+.demo-content-header span{font-size:10px;color:var(--text-dim)}
+.demo-screen{opacity:1;transform:translateY(0);transition:all .4s ease}
+.demo-screen.fade-out{opacity:0;transform:translateY(8px)}
+
+/* Demo screen internals */
+.dispatch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dispatch-field{padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.015);border:1px solid var(--border);transition:all .5s ease}
+.dispatch-field.visible{background:rgba(255,255,255,.05);border-color:var(--border-light)}
+.dispatch-field .label{font-size:9px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:.8px}
+.dispatch-field .value{font-size:12px;font-weight:600;color:transparent;transition:color .5s ease}
+.dispatch-field.visible .value{color:#fff}
+.dispatch-field.visible .value.red{color:var(--accent-light)}
+.dispatch-field.visible .value.gold{color:var(--gold)}
+
+.vitals-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.vital-card{padding:8px;border-radius:8px;text-align:center;background:rgba(255,255,255,.02);border:1px solid var(--border);transition:all .6s ease}
+.vital-card.warn{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.2)}
+.vital-card.ok{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2)}
+.vital-card .vlabel{font-size:9px;color:var(--text-dim);margin-bottom:2px}
+.vital-card .vval{font-size:18px;font-weight:800;font-family:'Outfit',sans-serif;color:transparent;transition:color .5s ease}
+.vital-card.warn .vval{color:var(--accent-light)}
+.vital-card.ok .vval{color:var(--green)}
+.vital-card .vunit{font-size:8px;color:var(--text-dim)}
+
+.narrative-box{border-radius:8px;padding:12px;background:rgba(229,62,62,.04);border:1px solid rgba(229,62,62,.12);font-size:11px;line-height:1.9;color:var(--text-muted);min-height:110px;position:relative}
+.narrative-cursor{display:inline-block;width:2px;height:13px;background:var(--accent);vertical-align:middle;margin-left:1px}
+.narrative-formats{display:flex;gap:6px;margin-top:8px}
+.narrative-formats span{padding:3px 8px;border-radius:5px;font-size:9px;font-weight:600;background:var(--border);color:var(--text-dim);border:1px solid var(--border)}
+.narrative-formats span.active{background:rgba(229,62,62,.12);color:var(--accent-light);border-color:rgba(229,62,62,.25)}
+
+.voice-wave{display:flex;align-items:center;justify-content:center;gap:2px;height:32px;margin-bottom:14px;padding:0 20px}
+.voice-wave span{width:3px;border-radius:2px;background:var(--accent);transition:height .15s ease;opacity:.2}
+.voice-wave.active span{opacity:.7}
+.voice-phrase{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:8px;opacity:.2;transition:opacity .6s ease}
+.voice-phrase.visible{opacity:1}
+.voice-spoken{padding:6px 10px;border-radius:6px;font-size:10px;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid var(--border);font-style:italic}
+.voice-parsed{padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid var(--border);transition:all .5s ease}
+.voice-phrase.visible .voice-parsed{color:var(--green);background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2)}
+
+.qa-bar{height:6px;border-radius:3px;background:var(--border);margin-bottom:16px;overflow:hidden}
+.qa-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--gold));width:0;transition:width .3s ease}
+.qa-bar-fill.done{background:linear-gradient(90deg,var(--green),#34d399)}
+.qa-check{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--border);margin-bottom:8px;transition:all .5s ease}
+.qa-check.pass{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2)}
+.qa-check .name{font-size:12px;font-weight:500;color:var(--text)}
+.qa-check .status{font-size:11px;font-weight:700;color:var(--green)}
+.qa-spinner{width:14px;height:14px;border-radius:50%;border:2px solid var(--gold);border-top-color:transparent;display:inline-block;animation:spin .8s linear infinite}
+.qa-result{margin-top:12px;padding:8px 12px;border-radius:8px;text-align:center;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);font-size:11px;color:var(--green);font-weight:600;opacity:0;transition:opacity .5s ease}
+.qa-result.visible{opacity:1}
+
+/* --- STATS --- */
+.stats{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 24px}
+.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.stat-val{font-family:'Outfit',sans-serif;font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+.stat-label{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.stat-sub{font-size:12px;color:var(--text-dim)}
+
+/* --- SECTIONS --- */
+.section{padding:100px 24px}
+.section-header{text-align:center;margin-bottom:56px}
+.section-header h2{font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin:16px 0;line-height:1.15}
+.section-header p{font-size:17px;color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.6}
+
+/* --- FEATURES --- */
+.features-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+.feature-card{padding:32px;border-radius:16px;background:var(--bg-card);border:1px solid var(--border);transition:all .3s ease;position:relative;overflow:hidden;cursor:default}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.feature-card .glow{position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;opacity:.15}
+.feature-card .icon-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.feature-card .icon-row .icon{font-size:28px}
+.feature-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:10px}
+.feature-card p{font-size:14px;line-height:1.7;color:var(--text-muted)}
+
+/* --- HOW IT WORKS --- */
+.steps{max-width:900px;margin:0 auto}
+.step{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:32px 0;border-bottom:1px solid var(--border);align-items:start}
+.step:last-child{border-bottom:none}
+.step-num{font-family:'Outfit',sans-serif;font-size:40px;font-weight:900;color:rgba(229,62,62,.18);line-height:1}
+.step h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.step h3 .icon{font-size:22px}
+.step p{font-size:15px;line-height:1.7;color:var(--text-muted)}
+
+/* --- COMPARISON --- */
+.comparison-table{max-width:900px;margin:0 auto;overflow-x:auto}
+.comparison-table table{width:100%;border-collapse:collapse}
+.comparison-table th{padding:12px 16px;border-bottom:2px solid var(--border);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);text-align:center}
+.comparison-table th:first-child{text-align:left;color:var(--text-dim)}
+.comparison-table th.highlight{color:var(--accent);font-size:14px;font-weight:800;font-family:'Outfit',sans-serif;border-bottom-color:var(--accent)}
+.comparison-table td{padding:14px 16px;font-size:13px;font-weight:500;text-align:center}
+.comparison-table td:first-child{text-align:left;color:var(--text)}
+.comparison-table td.highlight{background:rgba(229,62,62,.04)}
+.comparison-table tr:nth-child(even){background:rgba(18,21,28,.6)}
+.check{color:var(--green);font-size:18px}
+.dash{color:var(--text-dim);font-size:18px}
+.partial{color:var(--gold);font-size:12px;font-weight:600}
+
+/* --- EARLY ACCESS --- */
+.early-access{position:relative;overflow:hidden;background:var(--bg-card)}
+.early-access .glow-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow),transparent 60%);filter:blur(100px);opacity:.2}
+.ea-form{background:var(--bg);border-radius:16px;padding:32px;border:1px solid var(--border);text-align:left;max-width:560px;margin:0 auto;position:relative;z-index:1}
+.ea-form label{font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:8px}
+.ea-form input[type="email"]{width:100%;padding:14px 16px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:#fff;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;margin-bottom:20px}
+.ea-form input[type="email"]:focus{border-color:var(--accent)}
+.ea-roles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.ea-role{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;background:var(--bg-card);color:var(--text-dim);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.ea-role.selected{background:rgba(229,62,62,.12);color:var(--accent-light);border-color:rgba(229,62,62,.3)}
+.ea-fine{font-size:11px;color:var(--text-dim);text-align:center;margin-top:12px}
+.ea-success{background:var(--bg);border-radius:16px;padding:48px;border:1px solid rgba(16,185,129,.2);text-align:center;max-width:560px;margin:0 auto;position:relative;z-index:1;display:none}
+.ea-success .emoji{font-size:48px;margin-bottom:16px}
+.ea-success h3{font-size:24px;font-weight:800;color:#fff;margin-bottom:12px}
+.ea-success p{font-size:15px;color:var(--text-muted);line-height:1.6}
+
+/* --- FAQ --- */
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq-q h4{font-size:16px;font-weight:600;color:var(--text);transition:color .2s}
+.faq-q .toggle{font-size:20px;color:var(--text-dim);transition:transform .3s}
+.faq-item.open .faq-q h4{color:#fff}
+.faq-item.open .toggle{transform:rotate(45deg)}
+.faq-a{font-size:14px;line-height:1.7;color:var(--text-muted);margin-top:12px;padding-right:40px;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* --- CTA --- */
+.cta-section{padding:100px 24px;background:linear-gradient(135deg,#1a0a0a 0%,var(--bg) 40%,#0a0a1a 100%);position:relative;overflow:hidden;text-align:center}
+.cta-section .glow-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow),transparent 60%);filter:blur(100px);opacity:.3}
+.cta-section h2{font-size:clamp(30px,4vw,46px);font-weight:900;color:#fff;margin-bottom:20px;line-height:1.1;position:relative;z-index:1}
+.cta-section>p{font-size:17px;color:var(--text-muted);line-height:1.7;margin-bottom:36px;max-width:600px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+/* --- FOOTER --- */
+footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var(--border)}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-about p{font-size:13px;color:var(--text-dim);line-height:1.7;max-width:280px;margin-top:16px}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-family:'Outfit',sans-serif}
+.footer-col a{display:block;font-size:14px;color:var(--text-muted);padding:4px 0;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;font-size:12px;color:var(--text-dim)}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeUp{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glow-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px}
+.glow-dot-green{background:var(--green);box-shadow:0 0 8px var(--green)}
+
+/* --- RESPONSIVE --- */
+@media(max-width:900px){
+.hero-grid{grid-template-columns:1fr!important;padding-top:100px!important}
+.hero-demo{margin-top:20px}
+.stats-grid{grid-template-columns:1fr 1fr;gap:24px}
+.features-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+.demo-layout{grid-template-columns:1fr!important}
+.demo-sidebar{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border)}
+.nav-links a:not(.btn){display:none}
+.comparison-table{font-size:11px}
+.vitals-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:600px){
+.stats-grid{grid-template-columns:1fr 1fr}
+.hero-ctas{flex-direction:column}
+.dispatch-grid{grid-template-columns:1fr!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+<div class="nav-inner">
+  <a href="#" class="logo">
+    <div class="logo-icon">S</div>
+    <div class="logo-text">ScribeRun<span> EMS</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#demo-video" class="btn btn-primary btn-sm">Watch Demo</a>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-glow1"></div>
+<div class="hero-glow2"></div>
+<div class="hero-grid">
+  <div class="hero-copy">
+    <span class="badge badge-green">AI-Powered ePCR Platform</span>
+    <h1>Write the run.<br><em>Not the report.</em></h1>
+    <p>ScribeRun uses AI that reads your protocols, writes billing-optimized narratives, and reviews 100% of your charts automatically. Spend your time on patients, not paperwork.</p>
+    <div class="hero-ctas">
+      <a href="#demo-video" class="btn btn-primary btn-lg"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l8 5-8 5V3z" fill="currentColor"/></svg> Watch Demo</a>
+      <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">🛡️ HIPAA Compliant</div>
+      <div class="hero-trust-item">✓ NEMSIS v3.5.0</div>
+      <div class="hero-trust-item">🔒 SOC 2 Ready</div>
+    </div>
+  </div>
+  <div class="hero-demo" id="demo-video">
+    <div class="demo-box">
+      <div class="demo-topbar">
+        <div class="demo-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+        <div class="demo-url">app.scriberun.com — Patient Care Report</div>
+      </div>
+      <div class="demo-layout">
+        <div class="demo-sidebar" id="demoSidebar">
+          <div class="demo-tab active" data-screen="0">📋 Dispatch</div>
+          <div class="demo-tab" data-screen="1">❤️ Vitals</div>
+          <div class="demo-tab" data-screen="2">📝 Narrative</div>
+          <div class="demo-tab" data-screen="3">🎙️ Voice</div>
+          <div class="demo-tab" data-screen="4">✅ QA Review</div>
+          <div class="demo-progress" id="demoDots">
+            <span class="active"></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="demo-content">
+          <div class="demo-content-header">
+            <h3 id="demoTitle">CAD Auto-Import</h3>
+            <span>PCR #2024-4571</span>
+          </div>
+          <div class="demo-screen" id="demoScreen">
+            <!-- Screens injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+<div class="stats-grid">
+  <div><div class="stat-val">100%</div><div class="stat-label">AI Chart Review</div><div class="stat-sub">vs 2-5% industry standard</div></div>
+  <div><div class="stat-val">< 60s</div><div class="stat-label">Narrative Generation</div><div class="stat-sub">protocol-aware AI writing</div></div>
+  <div><div class="stat-val">40%</div><div class="stat-label">Fewer Denials</div><div class="stat-sub">billing-optimized documentation</div></div>
+  <div><div class="stat-val">8 min</div><div class="stat-label">Avg Chart Time</div><div class="stat-sub">vs 20+ min with competitors</div></div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+<div class="section-header">
+  <span class="badge badge-accent">Features</span>
+  <h2>Everything your medics need. Nothing they don't.</h2>
+  <p>Built by a paramedic who was tired of bloated software that fights you on every call.</p>
+</div>
+<div class="features-grid">
+  <div class="feature-card" style="--hover-color:var(--accent)">
+    <div class="glow" style="background:radial-gradient(circle,rgba(229,62,62,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">🧠</span><span class="badge badge-accent">INDUSTRY FIRST</span></div>
+    <h3>Protocol-Aware AI Narratives</h3>
+    <p>Upload your agency's protocols. Our AI reads them and writes narratives that demonstrate compliance with your specific standing orders — not generic templates.</p>
+  </div>
+  <div class="feature-card">
+    <div class="glow" style="background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">🎙️</span><span class="badge badge-blue">OFFLINE CAPABLE</span></div>
+    <h3>Voice-to-Chart</h3>
+    <p>Speak naturally. ScribeRun's EMS-trained dictation engine understands AOx4, SpO₂ on RA, NRB at 15 LPM — no corrections needed. Works offline with on-device processing.</p>
+  </div>
+  <div class="feature-card">
+    <div class="glow" style="background:radial-gradient(circle,rgba(16,185,129,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">🔍</span><span class="badge badge-green">INDUSTRY FIRST</span></div>
+    <h3>100% AI QA/QI Review</h3>
+    <p>Every single chart is automatically reviewed for protocol compliance, billing accuracy, and narrative quality. No more random 2-5% sampling.</p>
+  </div>
+  <div class="feature-card">
+    <div class="glow" style="background:radial-gradient(circle,rgba(245,158,11,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">💰</span><span class="badge badge-gold">REVENUE PROTECTION</span></div>
+    <h3>CMS Billing Optimization</h3>
+    <p>Real-time denial risk scoring and auto-generated medical necessity language. Narratives are engineered to survive audits from day one.</p>
+  </div>
+  <div class="feature-card">
+    <div class="glow" style="background:radial-gradient(circle,rgba(229,62,62,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">💊</span></div>
+    <h3>Weight-Based Drug Calculator</h3>
+    <p>19 drugs with automatic dosing, max-dose capping, and controlled substance chain of custody tracking with NDC/vial verification.</p>
+  </div>
+  <div class="feature-card">
+    <div class="glow" style="background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%)"></div>
+    <div class="icon-row"><span class="icon">📡</span></div>
+    <h3>Offline-First Architecture</h3>
+    <p>Full charting capability with no internet. Data syncs seamlessly when connectivity returns. Your medics are never blocked by a dead zone.</p>
+  </div>
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works" style="background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)">
+<div class="section-header">
+  <span class="badge badge-accent">How It Works</span>
+  <h2>From dispatch to done in four steps</h2>
+  <p>No bloat. No extra clicks. Just the fastest path from patient contact to chart complete.</p>
+</div>
+<div class="steps">
+  <div class="step"><div class="step-num">01</div><div><h3><span class="icon">📟</span> Dispatch Received</h3><p>CAD data auto-imports. Timestamps, location, chief complaint — all pre-filled before you arrive.</p></div></div>
+  <div class="step"><div class="step-num">02</div><div><h3><span class="icon">🩺</span> Treat the Patient</h3><p>Tap vitals, interventions, meds. Voice-dictate assessment notes. The interface moves at your pace, not against it.</p></div></div>
+  <div class="step"><div class="step-num">03</div><div><h3><span class="icon">🧠</span> AI Writes the Narrative</h3><p>One tap. Your agency's protocols + chart data + CMS billing rules = a complete, audit-ready narrative in seconds.</p></div></div>
+  <div class="step"><div class="step-num">04</div><div><h3><span class="icon">✅</span> Auto QA Review</h3><p>AI scans the chart for protocol deviations, billing gaps, and documentation deficiencies before you sign off.</p></div></div>
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section">
+<div class="section-header">
+  <span class="badge badge-accent">Comparison</span>
+  <h2>See how ScribeRun stacks up</h2>
+  <p>The features that matter most — compared head to head.</p>
+</div>
+<div class="comparison-table">
+<table>
+<thead><tr>
+  <th>Feature</th><th class="highlight">ScribeRun</th><th>ImageTrend</th><th>ESO</th><th>ZOLL</th><th>Traumasoft</th>
+</tr></thead>
+<tbody>
+  <tr><td>AI Narrative Generation</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="partial">Partial</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>Protocol-Aware AI</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>100% AI QA Review</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>CMS Billing Optimization</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>Voice-to-Chart</td><td class="highlight"><span class="check">✓</span></td><td><span class="partial">Partial</span></td><td><span class="partial">Partial</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>Offline Capability</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="partial">Partial</span></td></tr>
+  <tr><td>Weight-Based Drug Calc</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td></tr>
+  <tr><td>NEMSIS v3.5.0</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+<div class="section-header">
+  <span class="badge badge-accent">FAQ</span>
+  <h2>Questions? We've got answers.</h2>
+</div>
+<div class="faq-list">
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Do my medics need training to use ScribeRun?</h4><span class="toggle">+</span></div><div class="faq-a">ScribeRun was designed by a working paramedic to feel intuitive from the first call. Most crews are charting independently within one shift. We also provide onboarding sessions and in-app guidance for every feature.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>How does the AI narrative generation work?</h4><span class="toggle">+</span></div><div class="faq-a">You upload your agency's protocols. Our AI reads them alongside your chart data and CMS billing requirements, then generates a complete, audit-ready narrative in seconds. You review and approve before it saves — the medic always has final say.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Does it really work offline?</h4><span class="toggle">+</span></div><div class="faq-a">Yes. Full charting, vitals, medications, assessments, and voice dictation all work with zero connectivity. AI narrative generation and smart autofill activate when you reconnect. A rules-based template narrative is available as an offline fallback.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Is ScribeRun HIPAA compliant?</h4><span class="toggle">+</span></div><div class="faq-a">Absolutely. End-to-end encryption, role-based access controls, full audit logging, and BAA agreements are built into the platform from the ground up — not bolted on as an afterthought.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>What does the 100% AI QA review actually check?</h4><span class="toggle">+</span></div><div class="faq-a">Every chart is automatically scored across three dimensions: protocol compliance (did the medic follow standing orders), billing accuracy (does documentation support the billed service level), and narrative quality (completeness, consistency, medical terminology).</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>When will ScribeRun be available?</h4><span class="toggle">+</span></div><div class="faq-a">We're currently in active development with beta testing planned for select agencies soon. Request early access and you'll be the first to know when we're ready. Early access partners will get priority onboarding and input on feature development.</div></div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<div class="glow-bg"></div>
+<h2>Ready to stop fighting<br>your ePCR?</h2>
+<p>Join the agencies that are ready to document faster, bill smarter, and let AI handle the paperwork. Request early access and be the first to experience the future of EMS documentation.</p>
+<div class="cta-buttons">
+  <a href="#demo-video" class="btn btn-primary btn-lg"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l8 5-8 5V3z" fill="currentColor"/></svg> Watch Demo</a>
+  <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-grid">
+  <div class="footer-about">
+    <div class="logo"><div class="logo-icon" style="width:32px;height:32px;font-size:16px">S</div><div class="logo-text" style="font-size:18px">ScribeRun<span> EMS</span></div></div>
+    <p>AI-powered ePCR built by a paramedic, for paramedics. Smarter documentation, better billing, happier crews.</p>
+  </div>
+  <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#demo-video">Demo</a><a href="#faq">FAQ</a><a href="#">Changelog</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a></div>
+  <div class="footer-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">BAA</a><a href="#">HIPAA</a></div>
+</div>
+<div class="footer-bottom">
+  <span>© 2026 ScribeRun EMS. All rights reserved.</span>
+  <span>scriberun.com</span>
+</div>
+</footer>
+
+<script>
+// === NAV SCROLL ===
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// === FAQ ===
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// === FEATURE CARD HOVER ===
+document.querySelectorAll('.feature-card').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{card.style.borderColor='rgba(229,62,62,.3)'});
+  card.addEventListener('mouseleave',()=>{card.style.borderColor='var(--border)'});
+});
+
+// === ANIMATED DEMO WALKTHROUGH ===
+const SCREENS=[
+  {id:'dispatch',title:'CAD Auto-Import'},
+  {id:'vitals',title:'Real-Time Vitals'},
+  {id:'narrative',title:'AI Narrative Generation'},
+  {id:'voice',title:'Voice-to-Chart'},
+  {id:'qa',title:'AI Quality Review'}
+];
+
+const NARRATIVE_TEXT="Unit 45 dispatched to a residence for chest pain. Upon arrival, patient found sitting upright, alert and oriented x4, in moderate distress. 62 y/o male presenting with substernal chest pressure radiating to left arm, onset 30 min prior. Hx of HTN, hyperlipidemia. 12-lead acquired showing ST elevation in leads II, III, aVF — STEMI alert activated per protocol 4.2.1...";
+
+const VOICE_PHRASES=[
+  {spoken:'"Patient is alert and oriented times four..."',parsed:'AOx4'},
+  {spoken:'"Pulse ox ninety-eight on room air..."',parsed:'SpO₂ 98% on RA'},
+  {spoken:'"Gave point four milligrams narcan IN..."',parsed:'Naloxone 0.4mg IN'}
+];
+
+let activeScreen=0;
+let demoTimer=null;
+let animTimers=[];
+
+function clearAnimTimers(){animTimers.forEach(t=>clearTimeout(t)||clearInterval(t));animTimers=[];}
+
+function setActiveTab(idx){
+  document.querySelectorAll('.demo-tab').forEach((t,i)=>{t.classList.toggle('active',i===idx)});
+  document.querySelectorAll('#demoDots span').forEach((d,i)=>{d.classList.toggle('active',i===idx)});
+  document.getElementById('demoTitle').textContent=SCREENS[idx].title;
+}
+
+function renderScreen(idx){
+  clearAnimTimers();
+  const el=document.getElementById('demoScreen');
+  el.classList.add('fade-out');
+
+  const t=setTimeout(()=>{
+    setActiveTab(idx);
+    el.innerHTML=getScreenHTML(idx);
+    el.classList.remove('fade-out');
+    animateScreen(idx);
+  },400);
+  animTimers.push(t);
+}
+
+function getScreenHTML(idx){
+  if(idx===0){
+    const fields=[
+      {label:'Unit',value:'Medic 45'},
+      {label:'Priority',value:'Emergency',cls:'red'},
+      {label:'Complaint',value:'Chest Pain'},
+      {label:'Location',value:'1847 Oak Ridge Dr'},
+      {label:'Dispatch Time',value:'14:32:07'},
+      {label:'Response Code',value:'Code 3 — Lights & Sirens',cls:'gold'}
+    ];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span class="badge badge-blue">CAD IMPORT</span>
+      <span style="font-size:10px;color:var(--text-dim)">Auto-populated from dispatch</span>
+    </div>
+    <div class="dispatch-grid">${fields.map((f,i)=>`
+      <div class="dispatch-field" data-idx="${i}">
+        <div class="label">${f.label}</div>
+        <div class="value ${f.cls||''}">${f.value}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+  if(idx===1){
+    const vitals=[
+      {label:'HR',value:'104',unit:'bpm',warn:true},
+      {label:'BP',value:'158/94',unit:'mmHg',warn:true},
+      {label:'SpO₂',value:'97',unit:'%',warn:false},
+      {label:'RR',value:'22',unit:'/min',warn:true},
+      {label:'GCS',value:'15',unit:'E4V5M6',warn:false},
+      {label:'Temp',value:'98.6',unit:'°F',warn:false},
+      {label:'ETCO₂',value:'38',unit:'mmHg',warn:false},
+      {label:'BGL',value:'142',unit:'mg/dL',warn:false}
+    ];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span class="badge badge-green">LIVE CAPTURE</span>
+      <span style="font-size:10px;color:var(--text-dim)">14:38:22 — On Scene</span>
+    </div>
+    <div class="vitals-grid">${vitals.map((v,i)=>`
+      <div class="vital-card" data-idx="${i}" data-warn="${v.warn}">
+        <div class="vlabel">${v.label}</div>
+        <div class="vval">${v.value}</div>
+        <div class="vunit">${v.unit}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+  if(idx===2){
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <span class="badge badge-accent">AI GENERATING</span>
+      <span style="font-size:10px;color:var(--text-dim)">Billing-Optimized Format</span>
+    </div>
+    <div class="narrative-box">
+      <span class="glow-dot glow-dot-green"></span>
+      <span id="narrativeText"></span><span class="narrative-cursor" id="narrativeCursor"></span>
+    </div>
+    <div class="narrative-formats">
+      <span>CHART</span><span>SOAP</span><span>D-CHART</span><span class="active">Billing-Optimized</span>
+    </div>`;
+  }
+  if(idx===3){
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span class="badge badge-blue">LISTENING</span>
+      <span style="font-size:10px;color:var(--text-dim)">EMS-trained speech engine</span>
+    </div>
+    <div class="voice-wave" id="voiceWave">${Array.from({length:40}).map(()=>'<span style="height:3px"></span>').join('')}</div>
+    <div id="voicePhrases">${VOICE_PHRASES.map((vp,i)=>`
+      <div class="voice-phrase" data-idx="${i}">
+        <div class="voice-spoken">${vp.spoken}</div>
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h12M9 1l4 4-4 4" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="voice-parsed">${vp.parsed}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+  if(idx===4){
+    const checks=['Protocol Compliance','Billing Accuracy','Narrative Quality','NEMSIS Validation'];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span class="badge badge-gold" id="qaBadge">SCANNING</span>
+    </div>
+    <div class="qa-bar"><div class="qa-bar-fill" id="qaBarFill"></div></div>
+    ${checks.map((c,i)=>`<div class="qa-check" data-idx="${i}"><span class="name">${c}</span><span class="qa-spinner" data-idx="${i}"></span></div>`).join('')}
+    <div class="qa-result" id="qaResult">Score: 96/100 — Ready for signature</div>`;
+  }
+}
+
+function animateScreen(idx){
+  if(idx===0){
+    document.querySelectorAll('.dispatch-field').forEach((f,i)=>{
+      const t=setTimeout(()=>f.classList.add('visible'),400+i*350);
+      animTimers.push(t);
+    });
+  }
+  if(idx===1){
+    document.querySelectorAll('.vital-card').forEach((c,i)=>{
+      const t=setTimeout(()=>{
+        c.classList.add(c.dataset.warn==='true'?'warn':'ok');
+      },400+Math.floor(i/2)*500);
+      animTimers.push(t);
+    });
+  }
+  if(idx===2){
+    let i=0;
+    const el=document.getElementById('narrativeText');
+    const int=setInterval(()=>{
+      i++;el.textContent=NARRATIVE_TEXT.slice(0,i);
+      if(i>=NARRATIVE_TEXT.length)clearInterval(int);
+    },18);
+    animTimers.push(int);
+    // cursor blink
+    const cb=setInterval(()=>{
+      const cur=document.getElementById('narrativeCursor');
+      if(cur)cur.style.background=cur.style.background==='transparent'?'var(--accent)':'transparent';
+    },530);
+    animTimers.push(cb);
+  }
+  if(idx===3){
+    const wave=document.getElementById('voiceWave');
+    wave.classList.add('active');
+    // animate wave bars
+    const waveInt=setInterval(()=>{
+      wave.querySelectorAll('span').forEach(bar=>{
+        const h=6+Math.sin(Date.now()/150+Math.random()*10)*12+Math.random()*8;
+        bar.style.height=h+'px';
+        bar.style.opacity=(0.4+Math.random()*0.6).toString();
+      });
+    },100);
+    animTimers.push(waveInt);
+
+    VOICE_PHRASES.forEach((_,i)=>{
+      const t=setTimeout(()=>{
+        const phrase=document.querySelectorAll('.voice-phrase')[i];
+        if(phrase)phrase.classList.add('visible');
+      },600+i*1600);
+      animTimers.push(t);
+    });
+    // stop wave after last phrase
+    const stopT=setTimeout(()=>{
+      wave.classList.remove('active');
+      clearInterval(waveInt);
+      wave.querySelectorAll('span').forEach(bar=>{bar.style.height='3px';bar.style.opacity='0.2'});
+    },600+VOICE_PHRASES.length*1600);
+    animTimers.push(stopT);
+  }
+  if(idx===4){
+    let progress=0;
+    const thresholds=[30,55,75,90];
+    const fill=document.getElementById('qaBarFill');
+    const int=setInterval(()=>{
+      progress+=2;
+      if(progress>100)progress=100;
+      fill.style.width=progress+'%';
+      if(progress>=100)fill.classList.add('done');
+      thresholds.forEach((th,i)=>{
+        if(progress>th){
+          const check=document.querySelectorAll('.qa-check')[i];
+          if(check&&!check.classList.contains('pass')){
+            check.classList.add('pass');
+            const spinner=check.querySelector('.qa-spinner');
+            if(spinner)spinner.outerHTML='<span class="status">✓ Pass</span>';
+          }
+        }
+      });
+      if(progress>=100){
+        clearInterval(int);
+        document.getElementById('qaBadge').textContent='REVIEW COMPLETE';
+        document.getElementById('qaBadge').className='badge badge-green';
+        document.getElementById('qaResult').classList.add('visible');
+      }
+    },60);
+    animTimers.push(int);
+  }
+}
+
+// Tab clicks
+document.querySelectorAll('.demo-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    clearTimeout(demoTimer);clearInterval(demoTimer);
+    activeScreen=parseInt(tab.dataset.screen);
+    renderScreen(activeScreen);
+    startDemoTimer();
+  });
+});
+
+function startDemoTimer(){
+  demoTimer=setInterval(()=>{
+    activeScreen=(activeScreen+1)%SCREENS.length;
+    renderScreen(activeScreen);
+  },6000);
+}
+
+// Init
+renderScreen(0);
+startDemoTimer();
+</script>
+</body>
+</html>
