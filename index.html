@@ -306,6 +306,16 @@
       height: 3px;
       background: linear-gradient(90deg, var(--accent), #6d8cff);
     }
+    .product-card.featured-red {
+      border-color: #e53e3e;
+      box-shadow: 0 0 0 1px #e53e3e;
+    }
+    .product-card.featured-red::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #e53e3e, #fc8181);
+    }
     .product-icon {
       width: 48px; height: 48px;
       border-radius: 12px;
@@ -670,6 +680,7 @@
       <a href="#custom">Custom</a>
       <a href="#team">Team</a>
       <a href="atala-safety.html" class="nav-coming-soon">Atala Safety <span class="badge-soon">Coming Soon</span></a>
+      <a href="scriberun.html" class="nav-coming-soon" style="background:linear-gradient(135deg, #e53e3e, #fc8181) !important;">ScribeRun EMS <span class="badge-soon">Coming Soon</span></a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -678,7 +689,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">Coming Soon — Atala Safety</div>
+    <div class="hero-badge">New — ScribeRun EMS & Atala Safety</div>
     <h1>Software built for the <em>real world</em></h1>
     <p>From fire stations to finish lines, WP Software Technologies builds the tools professionals trust when it matters most.</p>
     <div class="hero-actions">
@@ -710,12 +721,20 @@
         </div>
       </div>
 
-      <!-- ePCR (Coming Soon) -->
-      <div class="product-card reveal">
-        <div class="product-icon epcr"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c62828" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
-        <h3>ePCR for EMS</h3>
-        <p>Electronic patient care reporting designed for speed and accuracy in the field. Capture vitals, narratives, and protocols without slowing down your crew.</p>
-        <span class="product-tag tag-soon">Coming Soon</span>
+      <!-- ScribeRun EMS (Coming Soon) -->
+      <div class="product-card featured featured-red reveal">
+        <div class="product-icon epcr" style="background:linear-gradient(135deg,#e53e3e,#c53030);border-radius:12px;position:relative;">
+          <svg width="28" height="28" viewBox="0 0 160 160" fill="none">
+            <path d="M 101 35 C 86 29 62 31 51 44 C 40 57 51 68 68 73 C 86 77 110 84 110 101 C 110 119 90 128 68 126 C 53 123 42 117 37 108" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 79 L 37 79 L 48 57 L 66 101 L 84 64 L 95 84 L 139 84" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>ScribeRun EMS</h3>
+        <p>AI-powered electronic patient care reporting. Protocol-aware narrative generation, voice-to-chart, 100% automated QA review, and CMS billing optimization — built by a paramedic, for paramedics.</p>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="product-tag tag-soon">Coming Soon</span>
+          <a href="scriberun.html" class="product-link" style="color:#e53e3e;">Preview →</a>
+        </div>
       </div>
 
       <!-- CAD (Coming Soon) -->
@@ -816,7 +835,7 @@
         <div class="custom-tile">
           <div class="custom-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg></div>
           <h4>Start With Our Core</h4>
-          <p>Adopt our existing platforms — Atala Safety, ePCR, CAD, Race Dashes, and more — built from the ground up with subject matter experts.</p>
+          <p>Adopt our existing platforms — Atala Safety, ScribeRun EMS, CAD, Race Dashes, and more — built from the ground up with subject matter experts.</p>
         </div>
         <div class="custom-tile">
           <div class="custom-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
