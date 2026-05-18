@@ -111,7 +111,6 @@ section{padding:6rem 5%;}
 .play-btn{width:80px;height:80px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,184,148,0.35);transition:transform 0.3s,box-shadow 0.3s;}
 .play-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(0,184,148,0.45);}
 .play-btn svg{margin-left:4px;}
-.video-caption{text-align:center;margin-top:1.25rem;font-size:0.78rem;color:rgba(255,255,255,0.3);font-weight:500;letter-spacing:0.04em;}
 
 /* ─── ATALA ACRONYM ─── */
 .acr-section{background:var(--gray-50);border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);}
@@ -329,7 +328,6 @@ footer{background:var(--gray-50);border-top:1px solid var(--gray-200);padding:3r
   <div class="video-header">
     <div class="section-tag" style="color:var(--teal);">See It In Action</div>
     <h2 class="section-title" style="color:var(--white);">A Quick Look at <span class="teal">ATALA Safety</span></h2>
-    <p class="section-sub" style="color:rgba(255,255,255,0.45);margin:0 auto;">Everything your safety program needs — in 30 seconds.</p>
   </div>
   <div class="video-frame-wrap">
     <div class="video-frame" id="videoFrame">
@@ -339,7 +337,6 @@ footer{background:var(--gray-50);border-top:1px solid var(--gray-200);padding:3r
         </div>
       </div>
     </div>
-    <div class="video-caption">30-second platform overview · Click to play</div>
   </div>
 </section>
 
@@ -688,8 +685,6 @@ function startVideo() {
   iframe.style.height = '100%';
   iframe.style.border = 'none';
   frame.appendChild(iframe);
-  var cap = document.querySelector('.video-caption');
-  if (cap) cap.textContent = '30-second platform overview';
 }
 
 // Scroll reveal
