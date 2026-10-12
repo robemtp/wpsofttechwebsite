@@ -1,0 +1,11 @@
+# Local backups — never publish these
+*.BACKUP-*.html
+*.bak
+
+# Local working source, not part of the published site
+scriberun-website.jsx
+
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
