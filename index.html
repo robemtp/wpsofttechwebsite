@@ -734,6 +734,24 @@
     .nav-coming-soon-red {
       background: linear-gradient(135deg, #e53e3e, #fc8181) !important;
     }
+    .nav-coming-soon-amber {
+      background: linear-gradient(135deg, #e08a1e, #f0a94a) !important;
+    }
+    .product-card.featured-amber {
+      border-color: #e08a1e;
+      box-shadow: 0 0 0 1px #e08a1e;
+    }
+    .product-card.featured-amber::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #e08a1e, #f0a94a);
+    }
+    .product-icon-erp {
+      background: linear-gradient(135deg, #e08a1e, #b86f12);
+    }
+    .product-link-amber { color: #b86f12; }
+    .product-link-amber:hover { color: #8c5409; }
 
     /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
@@ -746,6 +764,23 @@
     }
 
     /* ─── RESPONSIVE ─── */
+    /* Three product pills need more room than four text links; collapse the
+       nav to the hamburger well before the normal mobile breakpoint. */
+    @media (max-width: 1100px) {
+      nav { padding: 1rem 2rem; }
+      nav.scrolled { padding: 0.8rem 2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--white);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--gray-100);
+        gap: 1rem;
+        z-index: 999;
+      }
+    }
     @media (max-width: 1024px) {
       .about-layout { gap: 2.5rem; }
     }
@@ -805,6 +840,7 @@
       <a href="#team">Team</a>
       <a href="atala-safety.html" class="nav-coming-soon">Atala Safety <span class="badge-soon">Coming Soon</span></a>
       <a href="scriberun.html" class="nav-coming-soon nav-coming-soon-red">ScribeRun EMS <span class="badge-soon">Coming Soon</span></a>
+      <a href="wp-erp.html" class="nav-coming-soon nav-coming-soon-amber">WP ERP <span class="badge-soon">Coming Soon</span></a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
@@ -814,7 +850,7 @@
   <main id="main-content">
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">New — ScribeRun EMS & Atala Safety</div>
+    <div class="hero-badge">New — WP ERP, ScribeRun EMS & Atala Safety</div>
     <h1>Software built for the <em>real world</em></h1>
     <p>From fire stations to finish lines, WP Software Technologies builds the tools professionals trust when it matters most.</p>
     <div class="hero-actions">
@@ -859,6 +895,19 @@
         <div class="product-card-footer">
           <span class="product-tag tag-soon">Coming Soon</span>
           <a href="scriberun.html" class="product-link product-link-red">Preview →</a>
+        </div>
+      </div>
+
+      <!-- WP ERP (Coming Soon) -->
+      <div class="product-card featured featured-amber reveal">
+        <div class="product-icon product-icon-erp">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>WP ERP</h3>
+        <p>Custody and billing for warehousing and 3PL. Tracks every item, move, and bay — then turns that history into invoices your customer can audit line by line. Built on a real double-entry ledger.</p>
+        <div class="product-card-footer">
+          <span class="product-tag tag-soon">Coming Soon</span>
+          <a href="wp-erp.html" class="product-link product-link-amber">Preview →</a>
         </div>
       </div>
 
