@@ -1,1 +1,27 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'><defs><linearGradient id='g1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='#0D47A1'/><stop offset='100%' stop-color='#1565C0'/></linearGradient><linearGradient id='g2' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='#00BFA5'/><stop offset='100%' stop-color='#26A69A'/></linearGradient></defs><rect x='8' y='8' width='144' height='144' rx='28' fill='url(#g1)'/><path d='M36 42L52 118 68 70 80 70 96 118 112 42' fill='none' stroke='#FFF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/><path d='M80 118L80 50 105 50Q128 50 128 70 128 90 105 90L80 90' fill='none' stroke='url(#g2)' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/><circle cx='128' cy='112' r='5' fill='#00BFA5'/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <defs>
+    <linearGradient id="bgi" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A4094"/>
+      <stop offset="1" stop-color="#1663BE"/>
+    </linearGradient>
+    <linearGradient id="tli" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E1C8"/>
+      <stop offset="1" stop-color="#00BFAD"/>
+    </linearGradient>
+    <clipPath id="cpi"><rect width="1000" height="1000" rx="135"/></clipPath>
+  </defs>
+  <g transform="translate(0 0) scale(1.0)">
+    <rect width="1000" height="1000" rx="135" fill="url(#bgi)"/>
+    <g clip-path="url(#cpi)" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="3"><line x1="-900" y1="-60" x2="0" y2="1060"/><line x1="-805" y1="-60" x2="95" y2="1060"/><line x1="-710" y1="-60" x2="190" y2="1060"/><line x1="-615" y1="-60" x2="285" y2="1060"/><line x1="-520" y1="-60" x2="380" y2="1060"/><line x1="-425" y1="-60" x2="475" y2="1060"/><line x1="-330" y1="-60" x2="570" y2="1060"/><line x1="-235" y1="-60" x2="665" y2="1060"/><line x1="-140" y1="-60" x2="760" y2="1060"/><line x1="-45" y1="-60" x2="855" y2="1060"/><line x1="50" y1="-60" x2="950" y2="1060"/><line x1="145" y1="-60" x2="1045" y2="1060"/><line x1="240" y1="-60" x2="1140" y2="1060"/><line x1="335" y1="-60" x2="1235" y2="1060"/><line x1="430" y1="-60" x2="1330" y2="1060"/><line x1="525" y1="-60" x2="1425" y2="1060"/><line x1="620" y1="-60" x2="1520" y2="1060"/><line x1="715" y1="-60" x2="1615" y2="1060"/><line x1="810" y1="-60" x2="1710" y2="1060"/><line x1="905" y1="-60" x2="1805" y2="1060"/></g>
+    <g stroke="#00E1C8" stroke-opacity="0.35" stroke-width="4" fill="#00E1C8" fill-opacity="0.5">
+      <line x1="693" y1="175" x2="925" y2="175"/><circle cx="928" cy="175" r="7" stroke="none"/>
+      <line x1="80" y1="819" x2="307" y2="819"/><circle cx="78" cy="819" r="7" stroke="none"/>
+    </g>
+    <polyline points="173,263 268,726 402,416 570,726 659,263" fill="none" stroke="#FFFFFF"
+      stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M441,726 V318 H684 A142.5,142.5 0 0 1 684,603 H441" fill="none" stroke="url(#tli)"
+      stroke-width="47" stroke-linecap="round" stroke-linejoin="miter"/>
+    <circle cx="825" cy="712" r="30" fill="#00BFAD" fill-opacity="0.85"/>
+    <circle cx="825" cy="712" r="11" fill="#9FF2E6"/>
+  </g>
+</svg>
