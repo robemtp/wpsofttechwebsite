@@ -4,7 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScribeRun EMS — AI-Powered ePCR Platform</title>
-<meta name="description" content="ScribeRun EMS uses AI that reads your protocols, writes billing-optimized narratives, and reviews 100% of your charts automatically.">
+<meta name="description" content="ScribeRun EMS is an AI-assisted ePCR platform built by a 20-year paramedic. Protocol-aware narratives, built to the NEMSIS v3.5.0 data standard. Coming soon from WP Software Technologies.">
+<meta property="og:title" content="ScribeRun EMS — Write the run, not the report">
+<meta property="og:description" content="AI-assisted ePCR built by a 20-year paramedic. Protocol-aware narratives and chart review. Coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://w-psofttech.com/scriberun.html">
+<meta property="og:site_name" content="WP Software Technologies">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ScribeRun EMS — Write the run, not the report">
+<meta name="twitter:description" content="AI-assisted ePCR built by a 20-year paramedic. Coming soon.">
+<link rel="canonical" href="https://w-psofttech.com/scriberun.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,6 +36,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 
 /* --- NAV --- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all .3s ease}
+.nav-inner{position:relative}
 .nav.scrolled{padding:12px 0;background:rgba(10,12,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px}
@@ -35,6 +46,11 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text-muted);transition:color .2s}
 .nav-links a:hover{color:#fff}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:11px;margin:-11px;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;transition:all .3s;border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
 /* --- BUTTONS --- */
 .btn{font-family:'Outfit',sans-serif;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px}
@@ -197,8 +213,8 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 
 /* --- FAQ --- */
 .faq-list{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
-.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:20px 0;width:100%;background:none;border:none;font-family:inherit;text-align:left;gap:16px}
 .faq-q h4{font-size:16px;font-weight:600;color:var(--text);transition:color .2s}
 .faq-q .toggle{font-size:20px;color:var(--text-dim);transition:transform .3s}
 .faq-item.open .faq-q h4{color:#fff}
@@ -238,7 +254,11 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
 .demo-layout{grid-template-columns:1fr!important}
 .demo-sidebar{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border)}
+.hamburger{display:block}
+.nav-links{gap:18px}
 .nav-links a:not(.btn){display:none}
+.nav-links.open{position:absolute;top:100%;left:0;right:0;background:var(--bg-card,#0e1424);flex-direction:column;align-items:flex-start;padding:16px 24px;gap:14px;border-bottom:1px solid var(--border)}
+.nav-links.open a:not(.btn){display:block;font-size:15px;padding:6px 0}
 .comparison-table{font-size:11px}
 .vitals-grid{grid-template-columns:repeat(2,1fr)!important}
 }
@@ -254,7 +274,7 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 <!-- NAV -->
 <nav class="nav" id="mainNav">
 <div class="nav-inner">
-  <a href="#" class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-icon">S</div>
     <div class="logo-text">ScribeRun<span> EMS</span></div>
   </a>
@@ -264,6 +284,7 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
     <a href="#faq">FAQ</a>
     <a href="#demo-video" class="btn btn-primary btn-sm">Watch Demo</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
 </nav>
 
@@ -281,16 +302,16 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
       <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
     </div>
     <div class="hero-trust">
-      <div class="hero-trust-item">🛡️ HIPAA Compliant</div>
-      <div class="hero-trust-item">✓ NEMSIS v3.5.0</div>
-      <div class="hero-trust-item">🔒 SOC 2 Ready</div>
+      <div class="hero-trust-item">🛡️ Built to HIPAA requirements</div>
+      <div class="hero-trust-item">✓ NEMSIS v3.5.0 data standard</div>
+      <div class="hero-trust-item">🔒 Security-first architecture</div>
     </div>
   </div>
   <div class="hero-demo" id="demo-video">
     <div class="demo-box">
       <div class="demo-topbar">
         <div class="demo-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
-        <div class="demo-url">app.scriberun.com — Patient Care Report</div>
+        <div class="demo-url">Design preview &mdash; sample data, not live software</div>
       </div>
       <div class="demo-layout">
         <div class="demo-sidebar" id="demoSidebar">
@@ -320,11 +341,12 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 
 <!-- STATS -->
 <section class="stats">
+<div style="text-align:center;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.55;margin-bottom:1.25rem;">Design targets for launch &mdash; not measured results</div>
 <div class="stats-grid">
-  <div><div class="stat-val">100%</div><div class="stat-label">AI Chart Review</div><div class="stat-sub">vs 2-5% industry standard</div></div>
+  <div><div class="stat-val">100%</div><div class="stat-label">AI Chart Review</div><div class="stat-sub">every chart, not a sample</div></div>
   <div><div class="stat-val">< 60s</div><div class="stat-label">Narrative Generation</div><div class="stat-sub">protocol-aware AI writing</div></div>
-  <div><div class="stat-val">40%</div><div class="stat-label">Fewer Denials</div><div class="stat-sub">billing-optimized documentation</div></div>
-  <div><div class="stat-val">8 min</div><div class="stat-label">Avg Chart Time</div><div class="stat-sub">vs 20+ min with competitors</div></div>
+  <div><div class="stat-val">Fewer</div><div class="stat-label">Billing Denials</div><div class="stat-sub">documentation built to CMS requirements</div></div>
+  <div><div class="stat-val">Faster</div><div class="stat-label">Chart Completion</div><div class="stat-sub">dictate on scene instead of typing after</div></div>
 </div>
 </section>
 
@@ -338,7 +360,7 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 <div class="features-grid">
   <div class="feature-card" style="--hover-color:var(--accent)">
     <div class="glow" style="background:radial-gradient(circle,rgba(229,62,62,.15),transparent 70%)"></div>
-    <div class="icon-row"><span class="icon">🧠</span><span class="badge badge-accent">INDUSTRY FIRST</span></div>
+    <div class="icon-row"><span class="icon">🧠</span><span class="badge badge-accent">BUILT EMS-FIRST</span></div>
     <h3>Protocol-Aware AI Narratives</h3>
     <p>Upload your agency's protocols. Our AI reads them and writes narratives that demonstrate compliance with your specific standing orders — not generic templates.</p>
   </div>
@@ -350,7 +372,7 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
   </div>
   <div class="feature-card">
     <div class="glow" style="background:radial-gradient(circle,rgba(16,185,129,.15),transparent 70%)"></div>
-    <div class="icon-row"><span class="icon">🔍</span><span class="badge badge-green">INDUSTRY FIRST</span></div>
+    <div class="icon-row"><span class="icon">🔍</span><span class="badge badge-green">BUILT EMS-FIRST</span></div>
     <h3>100% AI QA/QI Review</h3>
     <p>Every single chart is automatically reviewed for protocol compliance, billing accuracy, and narrative quality. No more random 2-5% sampling.</p>
   </div>
@@ -393,26 +415,15 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 <!-- COMPARISON -->
 <section class="section">
 <div class="section-header">
-  <span class="badge badge-accent">Comparison</span>
-  <h2>See how ScribeRun stacks up</h2>
-  <p>The features that matter most — compared head to head.</p>
+  <span class="badge badge-accent">What's Different</span>
+  <h2>What makes ScribeRun different</h2>
+  <p>Not a feature checklist against someone else's product &mdash; the things we deliberately built differently, and why.</p>
 </div>
-<div class="comparison-table">
-<table>
-<thead><tr>
-  <th>Feature</th><th class="highlight">ScribeRun</th><th>ImageTrend</th><th>ESO</th><th>ZOLL</th><th>Traumasoft</th>
-</tr></thead>
-<tbody>
-  <tr><td>AI Narrative Generation</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="partial">Partial</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>Protocol-Aware AI</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>100% AI QA Review</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>CMS Billing Optimization</td><td class="highlight"><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>Voice-to-Chart</td><td class="highlight"><span class="check">✓</span></td><td><span class="partial">Partial</span></td><td><span class="partial">Partial</span></td><td><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>Offline Capability</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="partial">Partial</span></td></tr>
-  <tr><td>Weight-Based Drug Calc</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td></tr>
-  <tr><td>NEMSIS v3.5.0</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-</tbody>
-</table>
+<div class="steps">
+  <div class="step"><div class="step-num">01</div><div><h3><span class="icon">🧠</span> The AI reads <em>your</em> protocols</h3><p>Most documentation AI writes generic prose. ScribeRun is built to take your agency's own protocol set as its reference, so the narrative reflects the standard you actually operate under.</p></div></div>
+  <div class="step"><div class="step-num">02</div><div><h3><span class="icon">✅</span> Every chart reviewed, not a sample</h3><p>QA by sampling is a staffing compromise, not a choice. Automated review is designed to run on every chart, which is an architectural decision rather than a headcount one.</p></div></div>
+  <div class="step"><div class="step-num">03</div><div><h3><span class="icon">💵</span> Billing requirements built into the chart</h3><p>Documentation gaps that cause denials get flagged while the crew is still in the chart &mdash; not weeks later when a biller kicks it back.</p></div></div>
+  <div class="step"><div class="step-num">04</div><div><h3><span class="icon">🚑</span> Built by someone who ran the calls</h3><p>Twenty years on an ambulance, ten of them in the oilfield. Every screen was designed by someone who has written a report at 3am after a bad call &mdash; not by a product team interviewing medics.</p></div></div>
 </div>
 </section>
 
@@ -423,12 +434,12 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
   <h2>Questions? We've got answers.</h2>
 </div>
 <div class="faq-list">
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Do my medics need training to use ScribeRun?</h4><span class="toggle">+</span></div><div class="faq-a">ScribeRun was designed by a working paramedic to feel intuitive from the first call. Most crews are charting independently within one shift. We also provide onboarding sessions and in-app guidance for every feature.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>How does the AI narrative generation work?</h4><span class="toggle">+</span></div><div class="faq-a">You upload your agency's protocols. Our AI reads them alongside your chart data and CMS billing requirements, then generates a complete, audit-ready narrative in seconds. You review and approve before it saves — the medic always has final say.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Does it really work offline?</h4><span class="toggle">+</span></div><div class="faq-a">Yes. Full charting, vitals, medications, assessments, and voice dictation all work with zero connectivity. AI narrative generation and smart autofill activate when you reconnect. A rules-based template narrative is available as an offline fallback.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Is ScribeRun HIPAA compliant?</h4><span class="toggle">+</span></div><div class="faq-a">Absolutely. End-to-end encryption, role-based access controls, full audit logging, and BAA agreements are built into the platform from the ground up — not bolted on as an afterthought.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>What does the 100% AI QA review actually check?</h4><span class="toggle">+</span></div><div class="faq-a">Every chart is automatically scored across three dimensions: protocol compliance (did the medic follow standing orders), billing accuracy (does documentation support the billed service level), and narrative quality (completeness, consistency, medical terminology).</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>When will ScribeRun be available?</h4><span class="toggle">+</span></div><div class="faq-a">We're currently in active development with beta testing planned for select agencies soon. Request early access and you'll be the first to know when we're ready. Early access partners will get priority onboarding and input on feature development.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>Do my medics need training to use ScribeRun?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">ScribeRun was designed by a working paramedic to feel intuitive from the first call. Most crews are charting independently within one shift. We also provide onboarding sessions and in-app guidance for every feature.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>How does the AI narrative generation work?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">You upload your agency's protocols. Our AI reads them alongside your chart data and CMS billing requirements, then generates a complete, audit-ready narrative in seconds. You review and approve before it saves — the medic always has final say.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>Does it really work offline?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">Yes. Full charting, vitals, medications, assessments, and voice dictation all work with zero connectivity. AI narrative generation and smart autofill activate when you reconnect. A rules-based template narrative is available as an offline fallback.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>Is ScribeRun HIPAA compliant?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">ScribeRun is being built to HIPAA requirements from the ground up — end-to-end encryption, role-based access controls and full audit logging are core to the design, not bolted on. We are pre-launch, so the formal compliance paperwork and a signed BAA come with onboarding rather than existing today. Ask us where we are and we will tell you straight.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>What does the 100% AI QA review actually check?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">Every chart is automatically scored across three dimensions: protocol compliance (did the medic follow standing orders), billing accuracy (does documentation support the billed service level), and narrative quality (completeness, consistency, medical terminology).</div></div>
+  <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><h4>When will ScribeRun be available?</h4><span class="toggle" aria-hidden="true">+</span></button><div class="faq-a">ScribeRun is in active development, with beta testing planned for select agencies. Email us and we will add you to the list — early partners get priority onboarding and real input on what gets built.</div></div>
 </div>
 </section>
 
@@ -436,10 +447,10 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 <section class="cta-section">
 <div class="glow-bg"></div>
 <h2>Ready to stop fighting<br>your ePCR?</h2>
-<p>Join the agencies that are ready to document faster, bill smarter, and let AI handle the paperwork. Request early access and be the first to experience the future of EMS documentation.</p>
+<p>ScribeRun is coming soon. If you run an agency and want a look before launch — or just want to tell us what your current ePCR gets wrong — email us directly. You will reach a founder, not a help desk.</p>
 <div class="cta-buttons">
-  <a href="#demo-video" class="btn btn-primary btn-lg"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l8 5-8 5V3z" fill="currentColor"/></svg> Watch Demo</a>
-  <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
+  <a href="mailto:robbie@w-psofttech.com?subject=ScribeRun%20EMS%20enquiry" class="btn btn-primary btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg> Contact us</a>
+  <a href="tel:+16623144064" class="btn btn-secondary btn-lg">662-314-4064</a>
 </div>
 </section>
 
@@ -447,20 +458,33 @@ footer{padding:60px 24px 32px;background:var(--bg-card);border-top:1px solid var
 <footer>
 <div class="footer-grid">
   <div class="footer-about">
-    <div class="logo"><div class="logo-icon" style="width:32px;height:32px;font-size:16px">S</div><div class="logo-text" style="font-size:18px">ScribeRun<span> EMS</span></div></div>
+    <a href="index.html" class="logo" style="text-decoration:none;"><div class="logo-icon" style="width:32px;height:32px;font-size:16px">S</div><div class="logo-text" style="font-size:18px">ScribeRun<span> EMS</span></div></a>
     <p>AI-powered ePCR built by a paramedic, for paramedics. Smarter documentation, better billing, happier crews.</p>
   </div>
-  <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#demo-video">Demo</a><a href="#faq">FAQ</a><a href="#">Changelog</a></div>
-  <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a></div>
-  <div class="footer-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">BAA</a><a href="#">HIPAA</a></div>
+  <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#demo-video">Demo</a><a href="#faq">FAQ</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="index.html">WP SoftTech</a><a href="mailto:robbie@w-psofttech.com?subject=ScribeRun%20EMS%20enquiry">Contact</a><a href="tel:+16623144064">662-314-4064</a></div>
+  <div class="footer-col"><h4>Compliance</h4><p style="font-size:0.82rem;opacity:0.65;line-height:1.6;margin:0;">Built to HIPAA requirements and the NEMSIS v3.5.0 data standard. Compliance documentation and BAA provided at onboarding.</p></div>
 </div>
 <div class="footer-bottom">
   <span>© 2026 ScribeRun EMS. All rights reserved.</span>
-  <span>scriberun.com</span>
+  <a href="index.html" style="color:inherit;">w-psofttech.com</a>
 </div>
 </footer>
 
 <script>
+(function(){
+  var hb=document.getElementById('hamburger'), nl=document.querySelector('.nav-links');
+  if(hb&&nl){
+    hb.addEventListener('click',function(){
+      var open=nl.classList.toggle('open');
+      hb.classList.toggle('active',open);
+      hb.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+      nl.classList.remove('open');hb.classList.remove('active');hb.setAttribute('aria-expanded','false');
+    });});
+  }
+})();
 // === NAV SCROLL ===
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
@@ -471,7 +495,8 @@ function toggleFaq(el){
   const item=el.parentElement;
   const wasOpen=item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!wasOpen)item.classList.add('open');
+  document.querySelectorAll('.faq-q').forEach(q=>q.setAttribute('aria-expanded','false'));
+  if(!wasOpen){item.classList.add('open');el.setAttribute('aria-expanded','true');}
 }
 
 // === FEATURE CARD HOVER ===

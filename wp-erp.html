@@ -9,7 +9,12 @@
 <meta property="og:description" content="Every touch billed. Every rate snapshotted. An append-only ledger your auditors can follow. Coming soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://w-psofttech.com/wp-erp.html">
+<meta property="og:site_name" content="WP Software Technologies">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WP ERP — Custody &amp; Billing for Warehousing">
+<meta name="twitter:description" content="Every touch billed. Every rate snapshotted. An append-only ledger your auditors can follow. Coming soon.">
 <link rel="canonical" href="https://w-psofttech.com/wp-erp.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -43,7 +48,7 @@ nav.scrolled{padding:.7rem 3rem;box-shadow:0 1px 20px rgba(0,0,0,.06)}
 .nav-right a:hover{color:var(--dark)}
 .nav-back{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.2rem;border:1.5px solid var(--gray-300);border-radius:100px;font-size:.82rem!important;font-weight:600!important;transition:all .3s var(--transition)}
 .nav-back:hover{border-color:var(--dark);color:var(--dark)!important}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:11px;margin:-11px}
 .hamburger span{display:block;width:22px;height:2px;background:var(--dark);margin:5px 0;transition:all .3s;border-radius:2px}
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.active span:nth-child(2){opacity:0}
@@ -405,6 +410,8 @@ footer a:hover{color:#fff}
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>robbie@w-psofttech.com</a>
       <a class="cta-mail" href="mailto:bryan@w-psofttech.com?subject=WP%20ERP%20demo%20request">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>bryan@w-psofttech.com</a>
+      <a class="cta-mail" href="tel:+16623144064">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.72-1.72a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg>662-314-4064</a>
     </div>
   </div>
 </section>
@@ -436,7 +443,14 @@ footer a:hover{color:#fff}
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   // Demo video: autoplay muted unless the visitor prefers reduced motion.
   const dv=document.getElementById('demoVideo');
-  if(dv&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){dv.autoplay=true;dv.play().catch(()=>{});}
+  // Autoplay only when the visitor has not asked for reduced motion AND the
+  // connection can afford it. Otherwise the poster waits for a tap, so the page
+  // stays light on a jobsite connection.
+  if(dv&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const c=navigator.connection;
+    const slow=c&&(c.saveData||/(^|-)2g$|^3g$/.test(c.effectiveType||''));
+    if(!slow){dv.autoplay=true;dv.play().catch(()=>{});}
+  }
 </script>
 </body>
 </html>

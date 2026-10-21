@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATALASafety Promo</title>
+<title>Atala Safety — Platform Preview | WP Software Technologies</title>
+<meta name="description" content="An animated preview of the Atala Safety HSEQ platform. Shown inside the Atala Safety product page.">
+<meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,7 +21,15 @@
 }
 html, body { width:100%; height:100%; overflow:hidden; background:var(--darker); font-family:'Sora',sans-serif; color:var(--text); }
 
-#canvas { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--darker); }
+html, body { background:var(--darker); }
+#canvas {
+  position:fixed; top:50%; left:50%;
+  width:1280px; height:720px;
+  transform: translate(-50%,-50%) scale(var(--deck-scale, 1));
+  transform-origin: center center;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--darker);
+}
 
 .bg-orb { position:fixed; border-radius:50%; filter:blur(120px); opacity:0; transition:opacity 1.5s ease; pointer-events:none; }
 .bg-orb.visible { opacity:1; }
@@ -247,7 +257,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--darker);
       <div class="module-chip"><span class="chip-icon">👷</span> Contractor Mgmt</div>
       <div class="module-chip"><span class="chip-icon">📈</span> Quality</div>
     </div>
-    <div class="module-count">16+ integrated modules — and growing</div>
+    <div class="module-count">19 integrated modules — and growing</div>
   </div>
 
   <!-- S5: Dashboard Preview -->
@@ -318,7 +328,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--darker);
   <!-- S7: Stats -->
   <div class="slide" id="slide-6">
     <div class="stats-row">
-      <div class="stat-item"><div class="stat-number">19+</div><div class="stat-label">Modules</div></div>
+      <div class="stat-item"><div class="stat-number">19</div><div class="stat-label">Modules</div></div>
       <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Cloud-Based</div></div>
       <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Access Anywhere</div></div>
     </div>
@@ -329,7 +339,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--darker);
   <div class="slide" id="slide-7">
     <div class="cta-wrap">
       <div class="cta-headline">Safety management<br><span class="accent">reimagined.</span></div>
-      <div class="cta-url">atalasafety.com</div>
+      <div class="cta-url">w-psofttech.com/atala-safety.html</div>
       <div class="cta-sub">A WP Soft Tech Product</div>
     </div>
   </div>
@@ -342,6 +352,19 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--darker);
 </div>
 
 <script>
+// Scale the 1280x720 deck down to whatever screen it lands on, so nothing is
+// clipped on a phone or inside the demo iframe on the Atala Safety page.
+(function () {
+  var DW = 1280, DH = 720;
+  function fit() {
+    var s = Math.min(window.innerWidth / DW, window.innerHeight / DH);
+    document.documentElement.style.setProperty('--deck-scale', s);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+})();
+
 var SLIDE_DURATION = [3800, 4200, 4500, 4200, 5500, 4000, 3500, 4000];
 var TOTAL_DURATION = SLIDE_DURATION.reduce(function(a,b){return a+b},0);
 var currentSlide=-1, paused=false, timer=null, startTime=0, elapsed=0, progressRAF=null, barAnimated=false;

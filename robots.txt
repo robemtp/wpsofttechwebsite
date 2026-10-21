@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Embedded demo deck — shown inside atala-safety.html, not meant to stand alone
+Disallow: /atalasafety-promo.html
+
+Sitemap: https://w-psofttech.com/sitemap.xml
