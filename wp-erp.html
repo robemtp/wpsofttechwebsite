@@ -86,6 +86,15 @@ section{padding:6.5rem 3rem}
 .prev-head{text-align:center;margin-bottom:3.5rem}
 .prev-head .section-sub{margin:0 auto}
 .prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+/* DEMO VIDEO (lead card above the preview grid) */
+.prev-video{grid-column:1/-1}
+.prev-video:hover{transform:none}
+.prev-video .prev-body{padding:0;background:var(--dark);line-height:0}
+.demo-video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--dark)}
+.demo-cap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem 1.5rem}
+.demo-cap h4{margin-bottom:.3rem}
+.demo-cap p{max-width:64ch}
+.demo-note{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);white-space:nowrap}
 .prev-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .3s var(--transition),box-shadow .3s var(--transition)}
 .prev-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .prev-chrome{display:flex;align-items:center;gap:.4rem;padding:.7rem 1rem;background:var(--gray-100);border-bottom:1px solid var(--gray-200)}
@@ -264,6 +273,31 @@ footer a:hover{color:#fff}
 
     <div class="prev-grid">
 
+    <div class="prev-card prev-video reveal">
+      <div class="prev-chrome"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-title">WP ERP — live walkthrough</span></div>
+      <div class="prev-body">
+        <video
+          id="demoVideo"
+          class="demo-video"
+          muted loop playsinline controls
+          preload="metadata"
+          poster="assets/video/wp-erp-demo-poster.jpg"
+          width="1920" height="1080"
+          aria-label="Walkthrough of the WP ERP warehousing, custody and billing screens">
+          <source src="assets/video/wp-erp-demo-720p.mp4" type="video/mp4" media="(max-width:900px)">
+          <source src="assets/video/wp-erp-demo-1080p.mp4" type="video/mp4">
+          Your browser can&rsquo;t play this video. <a href="assets/video/wp-erp-demo-1080p.mp4">Download it instead</a>.
+        </video>
+      </div>
+      <div class="prev-cap demo-cap">
+        <div>
+          <h4>See WP ERP in action</h4>
+          <p>A run through the real screens &mdash; dashboard, custody, rate cards and invoicing. Sample data shown.</p>
+        </div>
+        <span class="demo-note">Demo data</span>
+      </div>
+    </div>
+
       <div class="prev-card reveal">
         <div class="prev-chrome"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-title">Dashboard</span></div>
         <div class="prev-body">
@@ -400,6 +434,9 @@ footer a:hover{color:#fff}
   document.getElementById('yr').textContent=new Date().getFullYear();
   const ro=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);ro.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  // Demo video: autoplay muted unless the visitor prefers reduced motion.
+  const dv=document.getElementById('demoVideo');
+  if(dv&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){dv.autoplay=true;dv.play().catch(()=>{});}
 </script>
 </body>
 </html>

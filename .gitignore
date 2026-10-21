@@ -9,3 +9,6 @@ scriberun-website.jsx
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Local preview config, not part of the published site
+.claude/
