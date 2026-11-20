@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WP ERP — Custody &amp; Billing for Warehousing | WP Software Technologies</title>
-<meta name="description" content="WP ERP tracks every touch, every bay, every rate &mdash; and turns custody into invoices your customers can audit. Start a free trial from WP Software Technologies.">
-<meta property="og:title" content="WP ERP — Custody &amp; Billing for Warehousing">
-<meta property="og:description" content="Every touch billed. Every rate snapshotted. An append-only ledger your auditors can follow. Start a free trial.">
+<title>WP ERP — One System from Quote to Invoice | WP Software Technologies</title>
+<meta name="description" content="WP ERP runs the whole operation on one record &mdash; quoting, purchasing, supply chain, inventory, production, warehousing, HR, safety and finance. Start a free trial from WP Software Technologies.">
+<meta property="og:title" content="WP ERP — One System from Quote to Invoice">
+<meta property="og:description" content="Nine modules on one database and one ledger. Quote it, buy it, build it, store it, ship it, bill it &mdash; without re-keying a thing. Start a free trial.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://w-psofttech.com/wp-erp.html">
 <meta property="og:site_name" content="WP Software Technologies">
 <meta property="og:image" content="https://w-psofttech.com/assets/og/wp-erp.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="WP ERP — custody and billing by WP Software Technologies">
+<meta property="og:image:alt" content="WP ERP — one system from quote to invoice, by WP Software Technologies">
 <meta name="twitter:image" content="https://w-psofttech.com/assets/og/wp-erp.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="WP ERP — Custody &amp; Billing for Warehousing">
-<meta name="twitter:description" content="Every touch billed. Every rate snapshotted. An append-only ledger your auditors can follow. Start a free trial.">
+<meta name="twitter:title" content="WP ERP — One System from Quote to Invoice">
+<meta name="twitter:description" content="Nine modules on one database and one ledger. Quote it, buy it, build it, store it, ship it, bill it &mdash; without re-keying a thing. Start a free trial.">
 <link rel="canonical" href="https://w-psofttech.com/wp-erp.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -175,6 +175,18 @@ section{padding:6.5rem 3rem}
 .mod-icon{width:42px;height:42px;border-radius:10px;background:var(--amber-light);color:var(--amber-dark);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
 .mod-card h4{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.45rem}
 .mod-card p{font-size:.85rem;color:var(--gray-500);line-height:1.6}
+.mod-card p + p{margin-top:.6rem}
+
+/* MODULE GRID — status pills + unconfirmed-copy markers */
+.mod-head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.45rem}
+.mod-head h4{margin-bottom:0}
+.mod-pill{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px;white-space:nowrap}
+.pill-live{background:var(--amber-light);color:var(--amber-dark)}
+.pill-next{background:var(--gray-100);color:var(--gray-500)}
+.mod-note{font-size:.78rem;color:var(--amber-dark);background:var(--amber-light);border:1px dashed rgba(224,138,30,.45);border-radius:8px;padding:.55rem .7rem;line-height:1.5;margin-top:.7rem}
+.mod-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .65rem;margin-top:2.2rem;font-size:.78rem;font-weight:600;color:var(--gray-500)}
+.mod-flow span{padding:.4rem .9rem;border:1px solid var(--gray-200);border-radius:100px;background:#fff}
+.mod-flow i{font-style:normal;color:var(--amber);font-weight:700}
 
 /* CTA */
 .cta{text-align:center;background:var(--gray-50);border-top:1px solid var(--gray-100)}
@@ -232,8 +244,9 @@ footer a:hover{color:#fff}
   </a>
   <div class="nav-right" id="navRight">
     <a href="#what">Overview</a>
-    <a href="#previews">Previews</a>
     <a href="#modules">Modules</a>
+    <a href="#warehouse">Warehouse</a>
+    <a href="#platform">Platform</a>
     <a href="index.html" class="nav-back">← All products</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navRight"><span></span><span></span><span></span></button>
@@ -244,16 +257,16 @@ footer a:hover{color:#fff}
 <section class="hero">
   <div class="hero-inner">
     <div class="badge-soon">Free Trial Open</div>
-    <h1>Every touch billed.<br>Every rate <em>remembered</em>.</h1>
-    <p class="hero-sub">WP ERP is custody and billing software for warehousing and 3PL operations. It tracks every item, every move, and every bay — then turns that history into invoices your customer can audit line by line.</p>
+    <h1>One system.<br>Quote to <em>invoice</em>.</h1>
+    <p class="hero-sub">WP ERP runs the whole operation on one record — quoting, purchasing, supply chain, inventory, production, warehousing, people, safety and the books. Quote it, buy it, build it, store it, ship it, bill it. Nobody re-keys anything into a second system.</p>
     <div class="hero-actions">
       <a href="https://app.w-psofttech.com/trial" class="btn-amber" target="_blank" rel="noopener">Start Free ERP Trial</a>
-      <a href="#previews" class="btn-ghost">Watch the demo &darr;</a>
+      <a href="#modules" class="btn-ghost">See the nine modules &darr;</a>
     </div>
     <div class="hero-stats">
-      <div><div class="hstat-val">143</div><div class="hstat-lbl">REST endpoints — every screen is an API call</div></div>
-      <div><div class="hstat-val">Append-only</div><div class="hstat-lbl">Custody and ledger records; corrections are new entries</div></div>
-      <div><div class="hstat-val">Rate-snapshot</div><div class="hstat-lbl">Every touch carries the rate in force when it happened</div></div>
+      <div><div class="hstat-val">9 modules</div><div class="hstat-lbl">One database, one ledger, one login — not nine apps stitched together</div></div>
+      <div><div class="hstat-val">Append-only</div><div class="hstat-lbl">History is never overwritten; a correction is a new entry that shows both</div></div>
+      <div><div class="hstat-val">Price-snapshot</div><div class="hstat-lbl">Every transaction keeps the rate or cost in force the day it happened</div></div>
     </div>
   </div>
 </section>
@@ -262,11 +275,122 @@ footer a:hover{color:#fff}
   <div class="inner what-grid">
     <div class="reveal">
       <div class="section-label">The Problem</div>
-      <h2 class="section-title">Handling is the revenue most systems quietly lose</h2>
-      <p class="section-sub">A heavy item might be received by crane, moved three times, re-crated, shrink-wrapped, inspected, staged and loaded before it ever leaves. Most warehouse systems bill the storage and forget the touches — or bill the storage twice because the item changed bays.</p>
-      <p class="section-sub" style="margin-top:1rem">WP ERP treats custody as the source of truth. Storage bills once per item per month no matter how many times it moves. Handling bills per touch, at the rate that was in force the day it happened.</p>
+      <h2 class="section-title">Most shops run six systems that don't talk</h2>
+      <p class="section-sub">The quote lives in a spreadsheet. Purchase orders live in email. Inventory lives in one app and the shop floor lives on a clipboard. Training records live in a binder, and at the end of the month somebody re-keys all of it into the accounting package by hand.</p>
+      <p class="section-sub" style="margin-top:1rem">Every one of those hand-offs is a place where a number changes, a charge gets missed, or a certification quietly expires. WP ERP puts all of it on one record, so the quote, the PO, the receipt, the work order, the storage, the shipment and the invoice are the same chain of events — not six copies of it.</p>
     </div>
     <div class="reveal">
+      <div class="gap-list">
+        <div class="gap-item"><div class="gap-dot"></div><div><h4>Enter it once</h4><p>What the salesperson quotes is what purchasing buys, what the floor builds, and what accounting bills. No re-keying between systems, so there is nothing to reconcile.</p></div></div>
+        <div class="gap-item"><div class="gap-dot"></div><div><h4>History is never overwritten</h4><p>Records are append-only. A correction posts as a new entry that reverses the old one, and both stay visible — so an auditor can follow what actually happened.</p></div></div>
+        <div class="gap-item"><div class="gap-dot"></div><div><h4>Price and cost changes don't rewrite the past</h4><p>A rate or cost revision applies going forward. Last quarter's invoices and last quarter's job costs never move underneath you.</p></div></div>
+        <div class="gap-item"><div class="gap-dot"></div><div><h4>Nobody approves their own work</h4><p>Segregation of duties is enforced by the software, not by policy. The person who creates and submits cannot be the person who approves.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE GRID — to mark a module as not yet shipping, add
+     <span class="mod-pill pill-next">Roadmap</span> to that card's .mod-head.
+     pill-live is the amber variant. -->
+<section id="modules">
+  <div class="inner">
+    <div class="reveal" style="text-align:center">
+      <div class="section-label">The Suite</div>
+      <h2 class="section-title">Nine modules, one record</h2>
+      <p class="section-sub" style="margin:0 auto">Turn on what you need. Every module writes to the same database and the same ledger, so a quote becomes a purchase order becomes a work order becomes an invoice without anyone typing it twice.</p>
+      <div class="mod-flow" style="justify-content:center">
+        <span>Quote</span><i>&rarr;</i><span>Purchase</span><i>&rarr;</i><span>Receive</span><i>&rarr;</i><span>Build</span><i>&rarr;</i><span>Store</span><i>&rarr;</i><span>Ship</span><i>&rarr;</i><span>Invoice</span>
+      </div>
+    </div>
+
+    <div class="mod-grid">
+
+      <!-- QUOTING -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg></div>
+        <div class="mod-head"><h4>Quoting</h4></div>
+        <p>Price the work the way your shop actually prices it. The line types, the layout and the pricing rules are configured to your business instead of forced into one fixed template.</p>
+        <p>An accepted quote carries straight through into purchasing and the job, so the numbers the customer agreed to are the numbers everyone downstream works from.</p>
+      </div>
+
+      <!-- PURCHASING -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 11.3a2 2 0 0 0 2 1.7h7.8a2 2 0 0 0 2-1.6L21 7H6"/></svg></div>
+        <div class="mod-head"><h4>Purchasing</h4></div>
+        <p>Requisition, approval, purchase order, receipt, vendor bill — in that order, each one matched to the last. Partial receipts are handled, and three-way match between the PO, the receipt and the vendor invoice means you don&rsquo;t pay for goods nobody took in.</p>
+        <p>Vendors carry their own price lists and lead times, so the buyer sees what it costs and when it lands before the order goes out.</p>
+      </div>
+
+      <!-- SUPPLY CHAIN -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.8"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.8-1.8"/></svg></div>
+        <div class="mod-head"><h4>Supply chain</h4></div>
+        <p>Demand against supply, in one place: what&rsquo;s on hand, what&rsquo;s committed to jobs, what&rsquo;s on order and what&rsquo;s short. Reorder points surface the shortage while there is still time to do something about it, instead of when the floor reaches for the part.</p>
+        <p>Inbound and outbound shipments tracked to the job, and vendor performance measured on what actually arrived and when — not on what was promised.</p>
+      </div>
+
+      <!-- INVENTORY -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 8v10a2 2 0 0 1-1 1.7l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 18V8"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div>
+        <div class="mod-head"><h4>Inventory</h4></div>
+        <p>Parts and SKUs with on-hand quantities by location, tracked by lot or by serial number where it matters. Committed stock is kept separate from available, so a job never gets promised parts that are already spoken for.</p>
+        <p>Cycle counts instead of a once-a-year shutdown, and costing your way — average, FIFO or standard — with the valuation posting straight to the ledger.</p>
+      </div>
+
+      <!-- MES / PRODUCTION -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V10l5 3V8l5 3V6l4 2v13"/></svg></div>
+        <div class="mod-head"><h4>Production &amp; MES</h4></div>
+        <p>Work orders and routings released to the floor. Operators clock on and off at a station, materials are issued and scrap is recorded as it happens, and in-process quality checks are part of the step rather than a form filled in afterwards.</p>
+        <p>Labour and material booked on the floor flow straight into job cost — so you can see what a job is costing while it is still running, not a month after it shipped.</p>
+      </div>
+
+      <!-- WAREHOUSING & CUSTODY -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <div class="mod-head"><h4>Warehousing &amp; custody</h4></div>
+        <p>Multi-site warehouses down to zone and bay, with every touch an item takes — received, placed, moved, re-crated, inspected, staged, released — timestamped, attributed to a person, and priced at the rate in force that day.</p>
+        <p>Storage bills once per item per month however many times it moves. Handling bills per touch. Built for 3PL custody work, where the item belongs to your customer and the record has to hold up.</p>
+        <p style="margin-top:.7rem"><a href="#warehouse" style="color:var(--amber-dark);font-weight:600;text-decoration:none">See it in detail &darr;</a></p>
+      </div>
+
+      <!-- HR -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/></svg></div>
+        <div class="mod-head"><h4>HR</h4></div>
+        <p>Employee records, onboarding, time and attendance, PTO, reviews and documents — with the policies configured to how your company actually runs rather than to someone else&rsquo;s handbook.</p>
+        <p>Certifications and licences carry expiry dates and warn you before they lapse, so the qualification check happens before the assignment instead of after the incident.</p>
+      </div>
+
+      <!-- SAFETY -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="mod-head"><h4>Safety</h4><span class="mod-pill pill-next">Add-on module</span></div>
+        <p>Safety here is <strong>Atala Safety</strong> — our full safety and compliance platform — added on as a module rather than a thin imitation of one built into an ERP.</p>
+        <p>Because it runs on the same record, the certification HR tracks and the training safety requires are the same record, and an incident is tied to the job, the site and the person it happened to.</p>
+        <p style="margin-top:.7rem"><a href="atala-safety.html" style="color:var(--amber-dark);font-weight:600;text-decoration:none">About Atala Safety &rarr;</a></p>
+      </div>
+
+      <!-- FINANCE -->
+      <div class="mod-card reveal">
+        <div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 7h18M3 12h18M3 17h18"/></svg></div>
+        <div class="mod-head"><h4>Finance</h4></div>
+        <p>A real double-entry general ledger underneath everything else — accounts, dimensions, dated posting rules, and append-only journals where a correction posts as a reversal rather than an edit.</p>
+        <p>Invoicing and receivables on top of it: create, submit, approve and post; aging by bucket, disputes, credit memos, write-offs and customer statements. Trial balance, P&amp;L and rollups drill from any figure down to the transaction that produced it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="warehouse" style="padding-bottom:0">
+  <div class="inner">
+    <div class="reveal" style="max-width:780px">
+      <div class="section-label">Module in detail — Warehousing &amp; custody</div>
+      <h2 class="section-title">Handling is the revenue most systems quietly lose</h2>
+      <p class="section-sub">This is the module WP ERP grew out of, built with a rigging and crating company that was capturing handling hours in one system and re-keying them into another to invoice. It is worth a close look, because the rest of the suite is built the same way.</p>
+      <p class="section-sub" style="margin-top:1rem">A heavy item might be received by crane, moved three times, re-crated, shrink-wrapped, inspected, staged and loaded before it ever leaves. Most warehouse systems bill the storage and forget the touches — or bill the storage twice because the item changed bays. WP ERP treats custody as the source of truth: storage bills once per item per month no matter how many times it moves, and handling bills per touch at the rate in force the day it happened.</p>
       <div class="gap-list">
         <div class="gap-item"><div class="gap-dot"></div><div><h4>Moving an item doesn't re-bill rent</h4><p>Occupancy follows the item across bays and yard overflow as one continuous storage cycle.</p></div></div>
         <div class="gap-item"><div class="gap-dot"></div><div><h4>Rate changes don't rewrite history</h4><p>A tariff revision applies going forward. A customer on a negotiated card keeps their rates until renewal, and old invoices never move.</p></div></div>
@@ -282,7 +406,7 @@ footer a:hover{color:#fff}
     <div class="prev-head reveal">
       <div class="section-label">Previews</div>
       <h2 class="section-title">A look inside WP ERP</h2>
-      <p class="section-sub">Custody, rates and billing, the way WP ERP presents them. Sample data shown.</p>
+      <p class="section-sub">The warehousing, custody and billing screens, the way WP ERP presents them. Sample data shown.</p>
     </div>
 
     <div class="prev-grid">
@@ -389,23 +513,20 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<section id="modules">
+<section id="platform">
   <div class="inner">
     <div class="reveal" style="text-align:center">
       <div class="section-label">Inside the Platform</div>
-      <h2 class="section-title">What's under the hood</h2>
-      <p class="section-sub" style="margin:0 auto">A real double-entry accounting core, not a billing spreadsheet with a warehouse bolted on.</p>
+      <h2 class="section-title">What every module sits on</h2>
+      <p class="section-sub" style="margin:0 auto">The modules are the part you click. This is the part that decides whether the numbers hold up: a real double-entry accounting core, not a set of apps with a reporting layer glued on top.</p>
     </div>
     <div class="mod-grid">
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 7h18M3 12h18M3 17h18"/></svg></div><h4>Ledger &amp; posting engine</h4><p>Double-entry accounts, dimensions, posting rules with activate/retire versions, and append-only journals. Corrections post as reversals.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><h4>Warehouses, zones &amp; bays</h4><p>Multi-site with per-site utilisation, zone and bay drill-down, and yard overflow handled as part of the same storage cycle.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h4>Custody &amp; touch tracking</h4><p>Receive, check in, place, move, re-crate, inspect, stage, load and release — each event timestamped, attributed and priced.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><h4>Rate sheets &amp; tariffs</h4><p>Standard tariff plus per-customer negotiated cards. Revisions are dated, so a customer can hold old rates until renewal.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></div><h4>AR, invoicing &amp; statements</h4><p>Create, submit, approve and post. Aging by bucket, disputes, credit memos, write-offs and customer statements.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg></div><h4>Reporting &amp; GL drill-down</h4><p>Trial balance (with verification), P&amp;L series, rollups by dimension, and drill from any account to the posting request behind it.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8v8M11 8v8M15 8v8M18 8v8"/></svg></div><h4>Labels &amp; scanning</h4><p>Batch-printed Code 128 barcodes, phone or handheld scanning, and a dock view built for the people actually on the floor.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Roles, audit &amp; tenant isolation</h4><p>Role-aware menus, full audit log of changes, enforced segregation of duties, and tenant separation built into the data layer.</p></div>
-      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg></div><h4>REST API &amp; webhooks</h4><p>143 documented endpoints with an OpenAPI spec. Every screen is an API call, so integration isn't an afterthought.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 7h18M3 12h18M3 17h18"/></svg></div><h4>Ledger &amp; posting engine</h4><p>Double-entry accounts, dimensions, posting rules with activate/retire versions, and append-only journals. Corrections post as reversals, never as edits.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><h4>Pricing, rate sheets &amp; tariffs</h4><p>A standard price list plus per-customer negotiated cards. Revisions are dated, so a customer can hold old rates until renewal and finished documents never change.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg></div><h4>Reporting &amp; GL drill-down</h4><p>Trial balance (with verification), P&amp;L series, rollups by dimension, and drill from any figure down to the posting request behind it.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8v8M11 8v8M15 8v8M18 8v8"/></svg></div><h4>Labels &amp; scanning</h4><p>Batch-printed Code 128 barcodes, phone or handheld scanning, and floor views built for someone wearing gloves.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Roles, audit &amp; tenant isolation</h4><p>Role-aware menus, a full audit log of changes, enforced segregation of duties, and tenant separation built into the data layer rather than the screens.</p></div>
+      <div class="mod-card reveal"><div class="mod-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg></div><h4>REST API &amp; webhooks</h4><p>Documented endpoints with an OpenAPI spec. Every screen is an API call, so integration isn't an afterthought.</p></div>
     </div>
   </div>
 </section>
@@ -413,7 +534,7 @@ footer a:hover{color:#fff}
 <section id="contact" class="cta">
   <div class="inner">
     <h2>Run it on your own numbers</h2>
-    <p>The trial is open &mdash; start one and put your own storage and handling through it. Want a walkthrough first? Tell us how you bill today and we&rsquo;ll show you how WP ERP handles it.</p>
+    <p>The trial is open &mdash; start one and put a real job through it, from the quote to the invoice. Want a walkthrough first? Tell us which systems you&rsquo;re re-keying between today and we&rsquo;ll show you where WP ERP closes the gap.</p>
     <div class="cta-trial">
       <a href="https://app.w-psofttech.com/trial" class="btn-amber" target="_blank" rel="noopener">Start Free ERP Trial</a>
     </div>
